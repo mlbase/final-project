@@ -46,12 +46,12 @@ public class UserController {
 	public String register(UserDto dto){
 		String msg = "NO";
 		
-		System.out.println(dto.toString());
+		//System.out.println(dto.toString());
 
 		
 		boolean b = false;
 		b = service.register(dto);
-		System.out.println(b);
+		//System.out.println(b);
 		if(b) {
 			msg = "OK";
 		}
@@ -85,7 +85,7 @@ public class UserController {
 		boolean b = false;
 		
 		b = service.idcheck(id);
-		System.out.println(b);
+		//System.out.println(b);
 		if(b) {
 			msg = "YES";
 		}
