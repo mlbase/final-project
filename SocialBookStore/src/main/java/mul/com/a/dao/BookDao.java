@@ -1,5 +1,7 @@
 package mul.com.a.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +15,8 @@ public interface BookDao {
 	int postbook(BookDto dto);
 	
 	int postorder(OrderDto dto);
+	
+	List<BookDto> booklist();
+	
+	List<OrderDto> orderlist();
 }

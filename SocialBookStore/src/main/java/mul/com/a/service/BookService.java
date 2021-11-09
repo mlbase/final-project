@@ -1,5 +1,7 @@
 package mul.com.a.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,5 +31,13 @@ public class BookService {
 		dto.setCard_num(encoder.encode(dto.getCard_num()));
 		
 		return dao.postorder(dto)>0?true:false;
+	}
+	
+	public List<BookDto> booklist(){
+		return dao.booklist();
+	}
+	
+	public List<OrderDto> orderlist(){
+		return dao.orderlist();
 	}
 }

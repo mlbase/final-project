@@ -8,7 +8,7 @@ public class BookDto {
 	private String writer;
 	private String publisher;
 	private int price;
-	private int isbn;
+	private String isbn;
 	private String content;
 	private String reg_date;
 	private String publish_date;
@@ -21,7 +21,9 @@ public class BookDto {
 		
 	}
 
-	public BookDto(int seq, String title, String filename, String writer, String publisher, int price, int isbn,
+	
+
+	public BookDto(int seq, String title, String filename, String writer, String publisher, int price, String isbn,
 			String content, String reg_date, String publish_date, String sort, String genre, int delivery_fee,
 			int amount) {
 		super();
@@ -40,6 +42,8 @@ public class BookDto {
 		this.delivery_fee = delivery_fee;
 		this.amount = amount;
 	}
+
+
 
 	public int getSeq() {
 		return seq;
@@ -89,11 +93,13 @@ public class BookDto {
 		this.price = price;
 	}
 
-	public int getIsbn() {
+	
+
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(int isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 
@@ -160,6 +166,8 @@ public class BookDto {
 				+ ", reg_date=" + reg_date + ", publish_date=" + publish_date + ", sort=" + sort + ", genre=" + genre
 				+ ", delivery_fee=" + delivery_fee + ", amount=" + amount + "]";
 	}
+
+	
 	
 	
 	
