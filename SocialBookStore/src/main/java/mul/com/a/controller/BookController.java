@@ -17,16 +17,31 @@ public class BookController {
 	@Autowired
 	BookService service;
 	
+	@PostMapping(value="/title")
+	public String titlecheck(String title) {
+		String msg ="NO";
+		
+		boolean b = false;
+		
+		b = service.titlecheck(title);
+		
+		if(b) {
+			msg = "YES";
+		}
+		
+		return msg;
+	}
+	
 	@PostMapping(value="/book")
 	public String createbook(BookDto dto) {
-		String msg = "책정보 업로드에 실패했습니다.";
+		String msg = "";
 		
 		boolean b = false;
 		
 		b = service.postbook(dto);
 		
 		if(b) {
-			msg = "책정보 업로드에 성공했습니다.";
+			msg = "OK";
 		}
 		
 		return msg;
@@ -34,27 +49,29 @@ public class BookController {
 	
 	@PostMapping(value="/order")
 	public String createorder(OrderDto dto) {
-		String msg = "주문에 실패했습니다.";
+		String msg = "";
 		
 		boolean b = false;
 		
 		b = service.postorder(dto);
 		
 		if(b) {
-			msg = "주문해주셔서 감사합니다!.";
+			msg = "OK";
 		}
 	
 		return msg;
 	}
 	
-	@GetMapping(value="/book")
+	@GetMapping(value="/booklist")
 	public List<BookDto> booklist() {
 		List<BookDto> list = service.booklist();
-		
+		for (BookDto dto : list) {
+			System.out.println(dto.toString());
+		}
 		return list;
 	}
 	
-	@GetMapping(value="/order")
+	@GetMapping(value="/orderlist")
 	public List<OrderDto> orderlist(String id) {
 		List<OrderDto> list = service.orderlist();
 		

@@ -28,7 +28,7 @@ public class BookService {
 	
 	public boolean postorder(OrderDto dto) {
 		
-		dto.setCard_num(encoder.encode(dto.getCard_num()));
+		dto.setCardNum(encoder.encode(dto.getCardNum()));
 		
 		return dao.postorder(dto)>0?true:false;
 	}
@@ -39,5 +39,9 @@ public class BookService {
 	
 	public List<OrderDto> orderlist(){
 		return dao.orderlist();
+	}
+	
+	public boolean titlecheck(String title) {
+		return dao.bookcheck(title)>0?true:false;
 	}
 }

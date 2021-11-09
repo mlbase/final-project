@@ -4,28 +4,28 @@ public class OrderDto {
 
 	private int seq;
 	private String id;
-	private int book_seq;
-	private String order_date;
+	private int bookSeq;
+	private String orderDate;
 	private String address;
-	private int delivery_fee;
-	private int book_count;
+	private int deliveryFee;
+	private int bookCount;
 	private int price;
-	private String card_num;
+	private String cardNum;
 	
 	public OrderDto() {}
 
-	public OrderDto(int seq, String id, int book_seq, String order_date, String address, int delivery_fee,
-			int book_count, int price, String card_num) {
+	public OrderDto(int seq, String id, int bookSeq, String orderDate, String address, int deliveryFee, int bookCount,
+			int price, String cardNum) {
 		super();
 		this.seq = seq;
 		this.id = id;
-		this.book_seq = book_seq;
-		this.order_date = order_date;
+		this.bookSeq = bookSeq;
+		this.orderDate = orderDate;
 		this.address = address;
-		this.delivery_fee = delivery_fee;
-		this.book_count = book_count;
+		this.deliveryFee = deliveryFee;
+		this.bookCount = bookCount;
 		this.price = price;
-		this.card_num = card_num;
+		this.cardNum = cardNum;
 	}
 
 	public int getSeq() {
@@ -44,20 +44,20 @@ public class OrderDto {
 		this.id = id;
 	}
 
-	public int getBook_seq() {
-		return book_seq;
+	public int getBookSeq() {
+		return bookSeq;
 	}
 
-	public void setBook_seq(int book_seq) {
-		this.book_seq = book_seq;
+	public void setBookSeq(int bookSeq) {
+		this.bookSeq = bookSeq;
 	}
 
-	public String getOrder_date() {
-		return order_date;
+	public String getOrderDate() {
+		return orderDate;
 	}
 
-	public void setOrder_date(String order_date) {
-		this.order_date = order_date;
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
 	}
 
 	public String getAddress() {
@@ -68,20 +68,20 @@ public class OrderDto {
 		this.address = address;
 	}
 
-	public int getDelivery_fee() {
-		return delivery_fee;
+	public int getDeliveryFee() {
+		return deliveryFee;
 	}
 
-	public void setDelivery_fee(int delivery_fee) {
-		this.delivery_fee = delivery_fee;
+	public void setDeliveryFee(int deliveryFee) {
+		this.deliveryFee = deliveryFee;
 	}
 
-	public int getBook_count() {
-		return book_count;
+	public int getBookCount() {
+		return bookCount;
 	}
 
-	public void setBook_count(int book_count) {
-		this.book_count = book_count;
+	public void setBookCount(int bookCount) {
+		this.bookCount = bookCount;
 	}
 
 	public int getPrice() {
@@ -92,21 +92,20 @@ public class OrderDto {
 		this.price = price;
 	}
 
-	public String getCard_num() {
-		return card_num;
+	public String getCardNum() {
+		return cardNum;
 	}
 
-	public void setCard_num(String card_num) {
-		this.card_num = card_num;
+	public void setCardNum(String cardNum) {
+		this.cardNum = cardNum;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderDto [seq=" + seq + ", id=" + id + ", book_seq=" + book_seq + ", order_date=" + order_date
-				+ ", address=" + address + ", delivery_fee=" + delivery_fee + ", book_count=" + book_count + ", price="
-				+ price + ", card_num=" + card_num + "]";
+		return "OrderDto [seq=" + seq + ", id=" + id + ", bookSeq=" + bookSeq + ", orderDate=" + orderDate
+				+ ", address=" + address + ", deliveryFee=" + deliveryFee + ", bookCount=" + bookCount + ", price="
+				+ price + ", cardNum=" + cardNum + "]";
 	}
-
 	
 	
 	
