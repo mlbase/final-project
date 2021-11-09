@@ -1,0 +1,239 @@
+@charset "UTF-8";
+
+/* common */
+body {
+	word-break: keep-all;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+a:link {
+    color: #222;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #222;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #222;
+    text-decoration: none;
+}
+
+img {
+	border:0px;
+}
+ul, li {
+	margin:0; 
+	padding:0; 
+	list-style:none;
+}
+
+
+.container1 > div {
+	background-color: white;
+	text-align: left;
+	display: block;
+	margin: 0;
+	padding: 0;
+	}
+
+@media all and (min-width:100px) {
+
+	/* 타이틀박스 */
+	.prodTopWrap {
+		width: 800px;
+		margin:0 auto;
+		padding:0;
+		position: relative;
+	}
+	.bookTitleWrap {
+		margin:0;
+		padding:0;
+		line-height: 1.4;
+		
+	}
+	.bookTitleWrap.left {
+		width: 740px;
+		float: left;
+		text-align: left;
+	}
+	.bookTitleWrap.left.tlist {
+		margin:0;
+		padding:0 0 12px 0;
+	}
+	.bookTitleWrap.left.tlist ul {
+		margin:0;
+		padding:0;
+	}
+	.bookTitleWrap.left.tlist li {
+		list-style: none;
+		padding-bottom: 12px;
+	}
+	.bookTitle {
+		font-size: 26px;
+		/* font-family: "Noto Sans KR", Malgun Gothic, 'Segoe WPC', 'Segoe UI',
+			'Apple SD Gothic Neo', Helvetica, AppleGothic, Sans-serif; */
+		color: #222;
+		line-height: 1.5;
+		letter-spacing: -0.05em;
+		font-weight: 500;
+	}
+	
+	.subTitle {
+		font-size: 14px;
+		/* font-family: malgun, "Malgun Gothic", Dotum, 돋움, sans-serif; */
+		color: #444;
+		text-decoration: none;
+	}
+	/* 도서 커버 및 서지정보 */
+	.prodBookWrap {
+		width: 800px;
+		position: relative;
+		margin: 0 auto;
+		padding: 0;
+	}
+	/* 좌상단 배너 */
+	.topleft_bn {
+		position: absolute;
+		left: -90px;
+		top: 0px;
+	}
+	/* 우상단 배너 */
+	.topright_bn {
+		position: absolute;
+		right: -100px;
+		top: 0px;
+	}
+	
+	/* 커버 */
+	.bookCoverWrap {
+        margin: 0;
+        padding: 0;
+        float: left;
+        width: 200px;
+    }
+
+    .bookCoverWrap .cover {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        float: left;
+        width: 202px;
+        height: auto;
+    }
+
+    .bookCoverWrap .bookImg img {
+        max-width: 200px;
+    }
+	/* 서지 정보 */
+	.bookInfoWrap {
+		margin: 0 0 0 40px;
+		padding: 0px;
+		float: left;
+		width: 560px;
+	}
+	.bookInfoWrap .info {
+		margin: 0;
+		padding: 5px 0 0 0;
+		float: left;
+		width: 560px;
+		text-align: left;
+		font-family: malgun, "Malgun Gothic", Dotum, 돋움, sans-serif;
+		font-size: 15px;
+		line-height: 1.5;
+	}
+	.bookInfowrap .infoList {
+		clear: both;
+		padding: 0;
+		margin: 0 0 25px 0;
+	}
+	.bookInfowrap .infoList ul {
+		padding: 0;
+		margin: 0;
+	}
+	.bookInfowrap .infoList ul li {
+		list-style: none;
+		position: relative;
+		padding: 0 0 3px 0;
+		margin: 0;
+	}
+	.bookInfowrap .infoList ul li .Litem {
+		position: absolute;
+		left: 0;
+		width: 100px;
+		color: #222;
+	}
+	.bookInfowrap .infoList ul li .LitemP {
+		position: absolute;
+		left: 0;
+		width: 100px;
+		top: 3px;
+		color: #222;
+	}
+	.bookInfowrap .infoList ul li .Ritem {
+		margin-left: 100px;
+		width: 460px;
+		padding-bottom: 3px;
+		color: #222;
+	}
+	.bookInfowrap .infoList ul li .Ritem a {
+		text-decoration: none;
+	}
+
+	/* 상단 큰제목 */
+	a.bookTitle:link {
+		font-size: 26px;
+		font-family: "Noto Sans KR", Malgun Gothic, 'Segoe WPC', 'Segoe UI',
+			'Apple SD Gothic Neo', Helvetica, AppleGothic, Sans-serif;
+		color: #222;
+		text-decoration: none;
+		line-height: 1.5;
+		letter-spacing: -0.05em;
+		font-weight: 500;
+	}
+	a.bookTitle:visited {
+		font-size: 26px;
+		font-family: "Noto Sans KR", Malgun Gothic, 'Segoe WPC', 'Segoe UI',
+			'Apple SD Gothic Neo', Helvetica, AppleGothic, Sans-serif;
+		color: #222;
+		text-decoration: none;
+		line-height: 1.5;
+		letter-spacing: -0.05em;
+		font-weight: 500;
+	}
+	a.bookTitle:hover {
+		font-size: 26px;
+		font-family: "Noto Sans KR", Malgun Gothic, 'Segoe WPC', 'Segoe UI',
+			'Apple SD Gothic Neo', Helvetica, AppleGothic, Sans-serif;
+		color: #222;
+		text-decoration: none;
+		line-height: 1.5;
+		letter-spacing: -0.05em;
+		font-weight: 500;
+	}
+	/* 빈 공간, 라인 */
+	.clear {
+		clear: both;
+	}
+	.space10 {
+		height: 10px;
+	}
+	.space30 {
+		height: 30px;
+	}
+	.PR10 {
+		padding-bottom: 10px;
+	}
+	.line {
+		height: 1px;
+		border-top: 1px solid skyblue;
+	}
+	.line1 {
+		border-top: 1px solid #ccc;
+	}
+}

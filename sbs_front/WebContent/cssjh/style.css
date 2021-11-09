@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+.container1 {
+	display: grid;
+	grid-gap: 10px;
+	height: 100vh;
+	grid-template-columns: 13vw 74vw 13vw;
+	grid-template-rows: 10vh 75vh 15vh;
+	grid-template-areas: 'asideLeft top asideRight'
+						 'asideLeft main asideRight'
+						 'asideLeft bottom asideRight';
+	margin-bottom:2em;
+}
+
+.container1 div {
+	background-color: white;
+	padding: 0;
+	/* border: 1px solid #000; */
+}
+
+.top {
+	grid-area: top;
+}
+
+/* 책 제목 */
+.bookTitleWrap {
+	
+	margin: 0;
+	padding: 20px 0 12px 0;
+}
+.bookTitleWrap li {
+	list-style: none;
+	padding-bottom: 12px;
+	text-decoration: none;
+}
+
+a.bookTitle {
+	font-size: 26px;
+	color: #222;
+	line-height: 1.5;
+	letter-spacing: -0.05em;
+	font-weight: 500;
+}
+
+.bookSubTitle1 {
+	font-size: 15px;
+	color: #222;
+	text-decoration: none;
+	line-height: 1.4;
+	letter-spacing: -0.02em;
+}
+
+.bookSubTitle2 {
+	font-size: 14px;
+	color: #444;
+	text-decoration: none;
+}
+
+.asideLeft {
+	grid-area: asideLeft;
+}
+
+/* 메인 */
+.main {
+	position: relative;
+	grid-area: main;
+}
+
+.line1 {
+	height: 1px;
+	border-top: 1px solid #ccc;
+}
+/* 도서이미지 */
+.left {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 404px;
+}
+.bookImg img {
+	max-width: 400px;
+}
+
+/* 서지정보 */
+.right {
+	margin: 0 0 0 40px;
+	padding: 0px;
+	float: left;
+	width:560px;
+}
+.bgInfo {
+	margin:0;
+	padding: 5px 0 0 0;
+	float: left;
+	width: 560px;
+	text-align: left;
+	font-size: 15px;
+	line-height: 1.5;
+}
+.infoList {
+	clear: both;
+	padding: 0;
+	margin: 0 0 25px 0;
+}
+.infoList ul {
+	padding:0;
+	margin:0;
+}
+.infoList ul li {
+	list-style: none;
+	position: relative;
+	padding: 0 0 3px 0;
+	margin: 0;
+}
+
+.infoList ul li .Litem {
+	position: absolute;
+	left: 0;
+	width: 100px;
+	color: #222;
+}
+.infoList ul li .Ritem {
+	margin-left: 100px;
+	width: 460px;
+	padding-bottom: 3px;
+	color: #222;
+}
+.infoList ul li .LitemP {
+	position: absolute;
+	left: 0;
+	width: 100px;
+	top: 3px;
+	color: #222;
+}
+.infoList ul li .RitemP {
+	margin-left: 100px;
+	width: 460px;
+	padding-bottom: 3px;
+	color: #222;
+	line-height: 1.1;
+}
+
+.asideRight {
+	grid-area: asideRight;
+}
+
+.bottom {
+	grid-area: bottom;
+}
+
+/* 빈공간 */
+.space30 {
+	margin: 0;
+	padding: 0;
+	height: 30px;
+}
+.fs24 {
+	font-size: 24px;
+}
