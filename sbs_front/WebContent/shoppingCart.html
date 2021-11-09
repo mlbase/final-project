@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Insert title here</title>
+
+<script src="WebContent/bookSearch.html"></script>
+<link rel="stylesheet" href="shoppingCSS/shoppingCart.css">
+<!--  
+<script>
+	$.ajax({
+		method : "GET",
+		url : "https://dapi.kakao.com/v3/search/book?target=title",
+		data : {
+			query : $("#bookName").val()
+		},
+		headers : {
+			Authorization : "KakaoAK df463844cdd08a00867744d4479dd735"
+		}
+
+	}).done(
+			function(msg) {
+				console.log(msg.documents[0].thumbnail);
+				console.log(msg.documents[0].title);
+				console.log(msg.documents[0].price);
+				console.log(msg.documents[0].status);
+
+				$("p").append(
+						"<img src='" + msg.documents[0].thumbnail + "'/>"
+								+ "  ");
+				$("p").append(
+						"<strong>" + msg.documents[0].title + "</strong>"
+								+ "  ");
+				$("p").append(
+						"<strong>" + msg.documents[0].price + "원" + "</strong>"
+								+ "  ");
+				$("p").append(
+						"<strong>" + msg.documents[0].status + "</strong>");
+
+			});
+</script>
+ -->
+
+<!-- 
+<script>
+        $(document).ready(function () {
+            $("#search").click(function () {
+                $.ajax({
+                    method: "GET",
+                    url: "https://dapi.kakao.com/v3/search/book?target=title",
+                    data: { query: $("#bookName").val() },
+                    headers: { Authorization: "KakaoAK df463844cdd08a00867744d4479dd735" }
+                    
+                })
+                    .done(function (msg) {
+                    	console.log(msg.documents[0].thumbnail);
+                        console.log(msg.documents[0].title);
+                        console.log(msg.documents[0].price);
+                        console.log(msg.documents[0].status);
+                        
+                        $("p").append("<img src='" + msg.documents[0].thumbnail + "'/>"+"  ");
+                        $("p").append("<strong>" + msg.documents[0].title + "</strong>"+"  ");
+                        $("p").append("<strong>" + msg.documents[0].price +"원"+ "</strong>"+"  ");
+                        $("p").append("<strong>" + msg.documents[0].status + "</strong>");
+                        
+                    });
+            });
+        });
+       
+</script>
+ -->
+
+
+
+</head>
+<body>
+
+
+	<div class="container container1">
+
+		<div class="mid1">상품명</div>
+		<div class="mid2">가격</div>
+		<div class="mid3">수량</div>
+		<div class="mid4">삭제</div>
+		<div class="mid5">상품 가격:19000원 <br>배송비:0원 <br>총 주문 상품 수:1권</div>
+		<div class="mid8">
+		<div id="image-frame1">
+		<img src="images/book1.jpg" id="image-title" >
+		</div>
+		돈의 시나리오
+		</div>
+		<div class="mid6">총 상품가격:19000원</div>
+		<div class="mid7">결제금액:19000원</div>
+		<div class="mid9">19000원</div>
+		<div class="mid10"><input type="number" min="1" value="1"></div>
+		<div class="button1">삭제</div>
+		<div class="button2">주문하기</div>
+	</div>
+
+<!-- 
+
+<div class="img1"><img src="images/book1.jpg" ></div>
+	<div class="container container2">
+	
+
+
+		<div class="mid6">총 상품가격</div>
+		<div class="mid7">결제예상금액</div>
+		<div class="button2">주문하기</div>
+		
+
+
+	</div>
+
+ -->
+
+
+
+</body>
+</html>
