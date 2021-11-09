@@ -19,4 +19,6 @@ public interface BookDao {
 	List<BookDto> booklist();
 	
 	List<OrderDto> orderlist();
+	
+	int bookcheck(String title);
 }
