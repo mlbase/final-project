@@ -15,5 +15,15 @@
 				${price}, #{card_num})
 	
 	</insert>
+	
+	<select id="booklist" resultType="mul.com.a.dto.BookDto">
+		select 	title, filename, writer, genre, isbn, reg_date, publish_date, sort
+		from sbs_book
+	</select>
+	
+	<select id="orderlist" resultType="mul.com.a.dto.OrderDto">
+		select id, book_seq, order_date, address, delivery_fee, book_count, price
+		from sbs_order
+	</select>
 
 </mapper>
