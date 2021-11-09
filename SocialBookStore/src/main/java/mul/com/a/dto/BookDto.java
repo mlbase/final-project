@@ -10,21 +10,19 @@ public class BookDto {
 	private int price;
 	private String isbn;
 	private String content;
-	private String reg_date;
-	private String publish_date;
+	private String regDate;
+	private String publishDate;
 	private String sort;
 	private String genre;
-	private int delivery_fee;
+	private int deliveryFee;
 	private int amount;
 	
 	public BookDto() {
 		
 	}
 
-	
-
 	public BookDto(int seq, String title, String filename, String writer, String publisher, int price, String isbn,
-			String content, String reg_date, String publish_date, String sort, String genre, int delivery_fee,
+			String content, String regDate, String publishDate, String sort, String genre, int deliveryFee,
 			int amount) {
 		super();
 		this.seq = seq;
@@ -35,15 +33,13 @@ public class BookDto {
 		this.price = price;
 		this.isbn = isbn;
 		this.content = content;
-		this.reg_date = reg_date;
-		this.publish_date = publish_date;
+		this.regDate = regDate;
+		this.publishDate = publishDate;
 		this.sort = sort;
 		this.genre = genre;
-		this.delivery_fee = delivery_fee;
+		this.deliveryFee = deliveryFee;
 		this.amount = amount;
 	}
-
-
 
 	public int getSeq() {
 		return seq;
@@ -93,8 +89,6 @@ public class BookDto {
 		this.price = price;
 	}
 
-	
-
 	public String getIsbn() {
 		return isbn;
 	}
@@ -111,20 +105,20 @@ public class BookDto {
 		this.content = content;
 	}
 
-	public String getReg_date() {
-		return reg_date;
+	public String getRegDate() {
+		return regDate;
 	}
 
-	public void setReg_date(String reg_date) {
-		this.reg_date = reg_date;
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 
-	public String getPublish_date() {
-		return publish_date;
+	public String getPublishDate() {
+		return publishDate;
 	}
 
-	public void setPublish_date(String publish_date) {
-		this.publish_date = publish_date;
+	public void setPublishDate(String publishDate) {
+		this.publishDate = publishDate;
 	}
 
 	public String getSort() {
@@ -143,12 +137,12 @@ public class BookDto {
 		this.genre = genre;
 	}
 
-	public int getDelivery_fee() {
-		return delivery_fee;
+	public int getDeliveryFee() {
+		return deliveryFee;
 	}
 
-	public void setDelivery_fee(int delivery_fee) {
-		this.delivery_fee = delivery_fee;
+	public void setDeliveryFee(int deliveryFee) {
+		this.deliveryFee = deliveryFee;
 	}
 
 	public int getAmount() {
@@ -163,9 +157,13 @@ public class BookDto {
 	public String toString() {
 		return "BookDto [seq=" + seq + ", title=" + title + ", filename=" + filename + ", writer=" + writer
 				+ ", publisher=" + publisher + ", price=" + price + ", isbn=" + isbn + ", content=" + content
-				+ ", reg_date=" + reg_date + ", publish_date=" + publish_date + ", sort=" + sort + ", genre=" + genre
-				+ ", delivery_fee=" + delivery_fee + ", amount=" + amount + "]";
+				+ ", regDate=" + regDate + ", publishDate=" + publishDate + ", sort=" + sort + ", genre=" + genre
+				+ ", deliveryFee=" + deliveryFee + ", amount=" + amount + "]";
 	}
+
+	
+
+	
 
 	
 	
