@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>책정보작성</h1>
+<div id="app">	
+	<form id="frm">
+
+	<table border="1">
+	<tr>
+		<td>아이디</td>
+		<td>
+			<input type="text" id="id" name="id" placeholder="아이디입력" size="20">
+			<p id="idcheck"></p>
+			<button type="button" id="idcheckbtn">중복확인</button>
+		</td>
+	</tr>
+		<td>파일이름</td>
+		<td>
+			<input type="text" id="filename" name="filename" placeholder="파일이름입력" size="20">
+		</td>
+	</tr>	
+	<tr>
+		<td>작가</td>
+		<td>
+			<input type="text" id="writer" name="writer" placeholder="작가이름입력" size="20">
+		</td>
+	</tr>
+	<tr>
+		<td>출판사</td>
+		<td>
+			<input type="text" id="publisher" name="publisher" placeholder="출판사입력" size="20">
+		</td>
+	</tr>
+	<tr>
+		<td>가격</td>
+		<td>
+			<input type="number" id="price" name="price" placeholder="가격입력" size="20">
+		</td>
+	</tr>
+	
+	<tr>
+		<td>isbn</td>
+		<td>
+			<input type="text" id="isbn" name="isbn" size="13">
+		</td>
+	</tr>
+	<tr>
+		<td>내용</td>
+		<td>
+			<textarea id="content" name="content" rows="50" cols="20"></textarea>
+		</td>
+	</tr>	
+	<tr>
+		<td>출판일</td>
+		<td>
+			<input type="date" id="publishDate" name="publishDate" >
+		</td>
+	</tr>
+	
+	<tr>
+		<td>분류</td>
+		<td>
+			<input type="text" id="sort" name="sort" placeholder="분류입력" size="20">
+		</td>
+	</tr>
+	<tr>
+		<td>장르</td>
+		<td>
+			<input type="text" id="genre" name="genre" placeholder="장르입력" size="20">
+		</td>
+	</tr>
+	<tr>
+		<td>배송비</td>
+		<td>
+			<input type="number" id="deliveryFee" name="deliveryFee" placeholder="배송비입력" size="10">
+		</td>
+	</tr>
+	<tr>
+		<td>재고</td>
+		<td>
+			<input type="number" id="amount" name="amount" placeholder="재고입력" size="5">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<button type="button" id="postbook">책정보 작성</button>
+		</td>
+	</tr>	
+	</table>
+	</form>	
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		url:"http://localhost:3000/id",
+		type:"post",
+		data:{ id:$("#id").val() },
+		success:function( resp ){
+		//	alert('success');
+		
+			if(resp.trim() == "YES"){
+				$("#idcheck").html("주문할수 있는 아이디입니다");
+			}else{
+				$("#idcheck").html("주문할 수 없는 아이디입니다");
+				$("#id").val("");
+			}			
+		},
+		error:function(){
+			alert('error');
+		}
+	});
+});
+	
+	$("#postbook").on("click",function () {
+		
+		let params = $("#frm").serialize();
+		console.log(params);
+		
+		$.ajax({
+			url:"http://localhost:3000/book",
+			type:"post",
+			data:params,
+			success:function(resp){
+			//	alert('success');
+				if(resp == "OK"){
+					alert("책정보 업로드에 성공했습니다.");	
+				}else{
+					alert("책정보 업로드에 실패했습니다.");
+				}			
+			},
+			error:function(){
+				alert('error');
+			}			
+		});
+	});
+});
+
+</script>
+</body>
+</html>
