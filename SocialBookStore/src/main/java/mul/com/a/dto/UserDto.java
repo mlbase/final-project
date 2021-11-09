@@ -12,15 +12,16 @@ public class UserDto {
 	private String birth;
 	private String name;
 	private String address;
-	private String reg_date;
+	private String regDate;
 	private int auth;
 	
-	public UserDto() {
-		
-	}
+	public UserDto() {}
+
+	
+	
 
 	public UserDto(int seq, String id, String pwd, String email, String following, String follower, String nickname,
-			String birth, String name, String address, String reg_date, int auth) {
+			String birth, String name, String address, String regDate, int auth) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -32,9 +33,12 @@ public class UserDto {
 		this.birth = birth;
 		this.name = name;
 		this.address = address;
-		this.reg_date = reg_date;
+		this.regDate = regDate;
 		this.auth = auth;
 	}
+
+
+
 
 	public int getSeq() {
 		return seq;
@@ -115,14 +119,23 @@ public class UserDto {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	
+	
 
-	public String getReg_date() {
-		return reg_date;
+	public String getRegDate() {
+		return regDate;
 	}
 
-	public void setReg_date(String reg_date) {
-		this.reg_date = reg_date;
+
+
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
+
+
+
 
 	public int getAuth() {
 		return auth;
@@ -136,7 +149,7 @@ public class UserDto {
 	public String toString() {
 		return "UserDto [seq=" + seq + ", id=" + id + ", pwd=" + pwd + ", email=" + email + ", following=" + following
 				+ ", follower=" + follower + ", nickname=" + nickname + ", birth=" + birth + ", name=" + name
-				+ ", address=" + address + ", reg_date=" + reg_date + ", auth=" + auth + "]";
+				+ ", address=" + address + ", regDate=" + regDate + ", auth=" + auth + "]";
 	}
 	
 	

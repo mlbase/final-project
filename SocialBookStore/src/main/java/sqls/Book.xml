@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.com.a.dao.BookDao">
+	<insert id="postbook" parameterType="mul.com.a.dto.BookDto">
+		insert into sbs_book(title, filename, writer, publisher, price, isbn, content,
+								reg_date, publish_date, sort, genre, delivery_fee, amount)
+		values( #{title}, #{filename}, #{writer}, #{publisher}, ${price}, ${isbn},
+				#{content}, NOW(), #{publishDate}, #{sort}, #{genre}, ${deliveryFee},
+				${amount})
+	</insert>
+	<insert id="postorder" parameterType="mul.com.a.dto.OrderDto">
+		insert into sbs_order(id, book_seq, order_date, address, delivery_fee, book_count,
+								price, card_num)
+		values( #{id}, ${bookSeq}, NOW(), #{address}, ${deliveryFee}, ${bookCount},
+				${price}, #{cardNum})
+	
+	</insert>
+	
+	<select id="booklist" resultType="mul.com.a.dto.BookDto">
+		<!-- select 	title, filename, writer, genre, isbn,  DATE_FORMAT(reg_date, '%Y%m%d%H%i%s'), 
+		DATE_FORMAT(publish_date, '%Y%m%d'), sort
+		from sbs_book
+		 -->
+		select 	title, filename, writer, genre, isbn,  reg_date, publish_date, sort
+		from sbs_book
+	</select>
+	
+	<select id="orderlist" resultType="mul.com.a.dto.OrderDto">
+		select id, book_seq, order_date, address, delivery_fee, book_count, price
+		from sbs_order
+	</select>
+	
+	<select id="bookcheck" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*)
+		from sbs_book
+		where title=#{title}
+	</select>
+
+</mapper>
