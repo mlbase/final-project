@@ -25,7 +25,10 @@
 	grid-area:picture;
 }
 .button-area{
-	grid-area:button-area;	
+	grid-area:button-area;
+	display:table-cell;
+	vertical-align:middle;	
+
 }
 #btn{
 	margin-top:0;
@@ -77,9 +80,9 @@
 	text-align:center;
 }
 .button{
-	margin-top:2.0vh;
-	padding:10vw;
 	text-align:center;
+	margin-top:31px;
+	
 }
 #btn1{
 	
@@ -106,7 +109,7 @@
 	text-align:left;	
 }
 /*-----------------------------  */
-#divContent {
+/* #divContent {
 	width:400px;
 	display:block;
 	margin: 0 auto;
@@ -134,4 +137,4 @@
 	border: 1px solid black;
 	text-align: center;
 	line-height: 50px;
-}
+} */
