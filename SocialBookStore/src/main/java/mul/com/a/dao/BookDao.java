@@ -21,4 +21,6 @@ public interface BookDao {
 	List<OrderDto> orderlist();
 	
 	int bookcheck(String title);
+	
+	BookDto getbook(String title);
 }
