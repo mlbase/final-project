@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>장바구니 작성</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>주문정보작성</h1>
+<h1>장바구니작성</h1>
 <div id="app">	
 	<form id="frm">
 	<input type="hidden" id="seq" name="bookSeq" value="">
@@ -79,25 +79,13 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<button type="button" id="postorder">주문정보 작성</button>
-		</td>
-	</tr>
-	<tr>
-		<td>주소</td>
-		<td>
-			<input type="text" id="address" name="address" placeholder="주소입력" size="50">
+			<button type="button" id="postwishlist">장바구니 작성</button>
 		</td>
 	</tr>
 	<tr>
 		<td>수량</td>
 		<td>
 			<input type="number" id="bookCount" name="bookCount" placeholder="1">
-		</td>
-	</tr>
-	<tr>
-		<td>카드번호</td>
-		<td>
-			<input type="password" id="cardNum" name="cardNum">
 		</td>
 	</tr>		
 	</table>
@@ -130,21 +118,21 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#postorder").on("click",function () {
+	$("#postwishlist").on("click",function () {
 		
 		let params = $("#frm").serialize();
 		console.log(params);
 		
 		$.ajax({
-			url:"http://localhost:3000/order",
+			url:"http://localhost:3000/wish",
 			type:"post",
 			data:params,
 			success:function(resp){
 			//	alert('success');
 				if(resp == "OK"){
-					alert("주문정보 업로드에 성공했습니다.");	
+					alert("장바구니 업로드에 성공했습니다.");	
 				}else{
-					alert("주문정보 업로드에 실패했습니다.");
+					alert("장바구니 업로드에 실패했습니다.");
 				}			
 			},
 			error:function(){
