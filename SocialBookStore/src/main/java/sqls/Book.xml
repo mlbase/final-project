@@ -36,5 +36,12 @@
 		from sbs_book
 		where title=#{title}
 	</select>
+	
+	<select id="getbook" parameterType="java.lang.String" resultType="mul.com.a.dto.BookDto">
+		select seq, title, filename, writer, publisher, price, isbn, sort, genre, delivery_fee, 
+		amount, publish_date
+		from sbs_book
+		where title=#{title}
+	</select>
 
 </mapper>
