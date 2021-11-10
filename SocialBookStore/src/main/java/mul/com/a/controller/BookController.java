@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mul.com.a.dto.BookDto;
 import mul.com.a.dto.OrderDto;
+import mul.com.a.dto.WishDto;
 import mul.com.a.service.BookService;
 
 @RestController
@@ -60,12 +61,27 @@ public class BookController {
 	
 	@PostMapping(value="/order")
 	public String createorder(OrderDto dto) {
-		System.out.println(dto.toString());
+		//System.out.println(dto.toString());
 		String msg = "";
 		
 		boolean b = false;
 		
 		b = service.postorder(dto);
+		
+		if(b) {
+			msg = "OK";
+		}
+	
+		return msg;
+	}
+	
+	@PostMapping(value="/wish")
+	public String wish(WishDto dto) {
+		String msg = "";
+		
+		boolean b = false;
+		
+		b = service.postwish(dto);
 		
 		if(b) {
 			msg = "OK";
@@ -90,6 +106,12 @@ public class BookController {
 		return list;
 	}
 	
+	@GetMapping(value="/wishlist")
+	public List<WishDto> wishlist(String id) {
+		List<WishDto> list = service.wishlist(id);
+		
+		return list;
+	}
 	
 	
 	

@@ -16,6 +16,10 @@
 				${price}, #{cardNum})
 	
 	</insert>
+	<insert id="postwish" parameterType="mul.com.a.dto.WishDto">
+		insert into sbs_wishlist(id, book_seq, delivery_fee, book_count, price)
+		values(#{id}, #{bookSeq}, #{deliveryFee}, #{bookCount}, #{price})
+	</insert>
 	
 	<select id="booklist" resultType="mul.com.a.dto.BookDto">
 		<!-- select 	title, filename, writer, genre, isbn,  DATE_FORMAT(reg_date, '%Y%m%d%H%i%s'), 
@@ -29,6 +33,12 @@
 	<select id="orderlist" resultType="mul.com.a.dto.OrderDto">
 		select id, book_seq, order_date, address, delivery_fee, book_count, price
 		from sbs_order
+	</select>
+	
+	<select id="wishlist" resultType="mul.com.a.dto.WishDto">
+		select id, book_seq, delivery_fee, book_count, price
+		from sbs_wishlist
+		where id=#{id}
 	</select>
 	
 	<select id="bookcheck" parameterType="java.lang.String" resultType="java.lang.Integer">
