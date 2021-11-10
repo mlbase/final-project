@@ -44,4 +44,8 @@ public class BookService {
 	public boolean titlecheck(String title) {
 		return dao.bookcheck(title)>0?true:false;
 	}
+	
+	public BookDto getbook(String title) {
+		return dao.getbook(title);
+	}
 }

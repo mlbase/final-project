@@ -3,133 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>책정보작성</h1>
+<h1>주문정보작성</h1>
 <div id="app">	
 	<form id="frm">
-
+	<input type="hidden" id="seq" name="bookSeq" value="">
+	<input type="hidden" id="price" name="price" value="">
+	<input type="hidden" id="deliveryFee" name="deliveryFee" value="">
 	<table border="1">
 	<tr>
 		<td>아이디</td>
 		<td>
 			<input type="text" id="id" name="id" placeholder="아이디입력" size="20">
 			<p id="idcheck"></p>
-			<button type="button" id="idcheckbtn">중복확인</button>
+			<button type="button" id="idcheckbtn">아이디확인</button>
 		</td>
 	</tr>
-		<td>파일이름</td>
+		<td>책제목</td>
 		<td>
-			<input type="text" id="filename" name="filename" placeholder="파일이름입력" size="20">
+			<input type="text" id="title" name="title" placeholder="제목입력" size="50">
+			<button type="button" id="checkbtn">책정보 불러오기</button>
 		</td>
 	</tr>	
 	<tr>
 		<td>작가</td>
 		<td>
-			<input type="text" id="writer" name="writer" placeholder="작가이름입력" size="20">
+			<span id="writer" name="writer"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>출판사</td>
 		<td>
-			<input type="text" id="publisher" name="publisher" placeholder="출판사입력" size="20">
+			<span id="publisher" name="publisher"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>가격</td>
 		<td>
-			<input type="number" id="price" name="price" placeholder="가격입력" size="20">
+			<span id="showprice" name="showprice"></span>
 		</td>
 	</tr>
 	
 	<tr>
 		<td>isbn</td>
 		<td>
-			<input type="text" id="isbn" name="isbn" size="13">
-		</td>
-	</tr>
-	<tr>
-		<td>내용</td>
-		<td>
-			<textarea id="content" name="content" rows="50" cols="20"></textarea>
+			<span id="isbn" name="isbn"></span>
 		</td>
 	</tr>	
 	<tr>
 		<td>출판일</td>
 		<td>
-			<input type="date" id="publishDate" name="publishDate" >
+			<span id="publishDate" name="publishDate" ></span>
 		</td>
 	</tr>
 	
 	<tr>
 		<td>분류</td>
 		<td>
-			<input type="text" id="sort" name="sort" placeholder="분류입력" size="20">
+			<span id="sort" name="sort"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>장르</td>
 		<td>
-			<input type="text" id="genre" name="genre" placeholder="장르입력" size="20">
+			<span id="genre" name="genre"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>배송비</td>
 		<td>
-			<input type="number" id="deliveryFee" name="deliveryFee" placeholder="배송비입력" size="10">
-		</td>
-	</tr>
-	<tr>
-		<td>재고</td>
-		<td>
-			<input type="number" id="amount" name="amount" placeholder="재고입력" size="5">
+			<span id="delivery_fee" name="delivery_fee"></span>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<button type="button" id="postbook">책정보 작성</button>
+			<button type="button" id="postorder">주문정보 작성</button>
 		</td>
-	</tr>	
+	</tr>
+	</tr>
+		<td>주소</td>
+		<td>
+			<input type="text" id="address" name="address" placeholder="주소입력" size="50">
+		</td>
+	</tr>
+	</tr>
+		<td>수량</td>
+		<td>
+			<input type="number" id="bookCount" name="bookCount" placeholder="1">
+		</td>
+	</tr>
+	</tr>
+		<td>카드번호</td>
+		<td>
+			<input type="password" id="cardNum" name="cardNum">
+		</td>
+	</tr>		
 	</table>
 	</form>	
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-	$.ajax({
-		url:"http://localhost:3000/id",
-		type:"post",
-		data:{ id:$("#id").val() },
-		success:function( resp ){
-		//	alert('success');
-		
-			if(resp.trim() == "YES"){
-				$("#idcheck").html("주문할수 있는 아이디입니다");
-			}else{
-				$("#idcheck").html("주문할 수 없는 아이디입니다");
-				$("#id").val("");
-			}			
-		},
-		error:function(){
-			alert('error');
-		}
+	$("#checkbtn").click(function () {
+		$.ajax({
+			url:"http://localhost:3000/book",
+			type:"get",
+			data:{ title:$("#title").val() },
+			success:function( resp ){
+				//alert(resp.price);
+				$("#seq").val(resp.seq);
+				$("#writer").html(resp.writer);
+				$("#publisher").html(resp.publisher);
+				$("#showprice").html(resp.price);
+				$("#isbn").html(resp.isbn);
+				$("#publishDate").html(resp.publishDate);
+				$("#delivery_fee").html(resp.deliveryFee);
+				$("#sort").html(resp.sort);
+				$("#genre").html(resp.genre);
+				$("#price").val(resp.price);
+				$("#deliveryFee").val(resp.deliveryFee)
+			},
+			error:function(){
+				alert('error');
+			}
+		});
 	});
-});
 	
-	$("#postbook").on("click",function () {
+	$("#postorder").on("click",function () {
 		
 		let params = $("#frm").serialize();
 		console.log(params);
 		
 		$.ajax({
-			url:"http://localhost:3000/book",
+			url:"http://localhost:3000/order",
 			type:"post",
 			data:params,
 			success:function(resp){
 			//	alert('success');
 				if(resp == "OK"){
-					alert("책정보 업로드에 성공했습니다.");	
+					alert("주문정보 업로드에 성공했습니다.");	
 				}else{
-					alert("책정보 업로드에 실패했습니다.");
+					alert("주문정보 업로드에 실패했습니다.");
 				}			
 			},
 			error:function(){
