@@ -57,12 +57,13 @@
 	
 }
 .icon-frame{
-	
+	margin-top:20px;
 }
 .icon-area1{
 	width: 150px;
     height:150px;
     float:left; 
+    margin-left:20vw;
 }
 .icon-area2{
 	width: 150px;

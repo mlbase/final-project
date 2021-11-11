@@ -16,11 +16,37 @@
 </footer>
 <script type="text/javascript">
 $(document).ready(function(){
+	/* $("#main").remove(); */
+	
+	drawHtml("main/header.html", "#header");
+	drawHtml("main/navbar.html", "#nav");
+	drawHtml("main/footer.html", "#footer");
+	drawHtml("main/content.html", "#main");
+	/*
+	$.ajax({
+		url:"main/header.html",
+		type:"get",
+		success:function(html){
+			$("#header").text(html);		
+		}
+	});
+	
 	$("#header").load("main/header.html");
 	$("#nav").load("main/navbar.html");
 	$("#footer").load("main/footer.html");
-	$("#main").load("main/main.html");
+	$("#main").load("main/main.html");*/
 	/* $("#main").load("profile.html"); */
 });
+
+function drawHtml(html_file, tag) {
+	$.ajax({
+		url:html_file,
+		type:"get",
+		success:function(dhtml){
+			$(tag).html(dhtml);		
+		}
+	});
+}
+
 </script>
 </html>
