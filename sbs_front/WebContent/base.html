@@ -15,13 +15,15 @@
 <footer id="footer">
 </footer>
 <script type="text/javascript">
+let parsing = location.href.split("?");
+
+
 $(document).ready(function(){
 	/* $("#main").remove(); */
-	
 	drawHtml("main/header.html", "#header");
 	drawHtml("main/navbar.html", "#nav");
 	drawHtml("main/footer.html", "#footer");
-	drawHtml("main/main.html", "#main");
+	drawHtml(parsing[1], "#main");
 	/*
 	$.ajax({
 		url:"main/header.html",
@@ -34,8 +36,12 @@ $(document).ready(function(){
 	$("#header").load("main/header.html");
 	$("#nav").load("main/navbar.html");
 	$("#footer").load("main/footer.html");
+
+	
+=======
 	$("#main").load("main/main.html");*/
 	/* $("#main").load("profile.html"); */
+
 });
 
 function drawHtml(html_file, tag) {
