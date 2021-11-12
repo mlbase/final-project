@@ -6,6 +6,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Profile</title>
 <link rel="stylesheet" href="cssKwak/profile.css">
 </head>
@@ -41,6 +42,7 @@
 	</div>
 	<div class="content">content<br>
 		 <ul class="infinite-list">infinite list</ul>
+		 <div id=json></div>
 	</div>
 	
 	
@@ -48,8 +50,43 @@
 	<div class="right">right</div>
 </div>
 <script type="text/javascript">
+const listElm = document.querySelector('.infinite-list');
+let itemNum = 1;
 
+const loadMoreList = () => {
+  for (let i = 0; i < 10; i++) {
+    const item = document.createElement('li');
+    item.innerText = 'Item ' + itemNum++;
+    listElm.appendChild(item);
+  }
+}
 
+listElm.addEventListener('scroll', () => {
+  if(listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
+    loadMoreList();
+  }
+});
+
+// Initially load items
+loadMoreList();
+
+$(document).ready(function(){
+	
+	$.ajax({
+		url:"http://localhost:3000/myfeed?id=test1",
+		type: "get",
+		success: function(list){
+			
+			alert(JSON.stringify(list));
+			document.getElementById('json').innerHTML=JSON.stringify(list);
+			
+		},
+		error:function(){
+			alert('error');
+		}
+	});
+
+});
 </script>
 </body>
 </html>
