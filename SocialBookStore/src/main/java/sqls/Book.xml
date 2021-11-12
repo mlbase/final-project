@@ -26,7 +26,7 @@
 		DATE_FORMAT(publish_date, '%Y%m%d'), sort
 		from sbs_book
 		 -->
-		select 	title, filename, writer, genre, isbn,  reg_date, publish_date, sort
+		select *
 		from sbs_book
 	</select>
 	

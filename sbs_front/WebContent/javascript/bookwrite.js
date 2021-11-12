@@ -63,14 +63,17 @@ $(document).ready(function(){
                 headers: { Authorization: "KakaoAK df463844cdd08a00867744d4479dd735" },
                 success: function(resp){
                 	alert(JSON.stringify(resp));
-					alert(resp.title);
-					$("#title").val(resp.title);
-					$("#filename").val(resp.thumbnail);
-					$("#writer").val(resp.authors);
-					$("#publishdate").val(resp.datetime);
-					$("#publisher").val(resp.publisher);
-					$("#price").val(resp.price);
-					$("#content").val(resp.contents);
+					//console.log(JSON.stringify(resp));
+					console.log(resp.documents[0].thumbnail);
+					let realdate = resp.documents[0].datetime.split("T",1);
+					console.log(realdate);
+					$("#title").val(resp.documents[0].title);
+					$("#filename").val(resp.documents[0].thumbnail);
+					$("#writer").val(resp.documents[0].authors);
+					$("#publishDate").val(realdate);
+					$("#publisher").val(resp.documents[0].publisher);
+					$("#price").val(resp.documents[0].price);
+					$("#content").val(resp.documents[0].contents);
                 }
                 
             });
