@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Insert title here</title>
 <link rel="stylesheet" href="cssKwak/Feed.css">
 </head>
@@ -10,10 +11,36 @@
 	
 	<div class="left">left</div>
 	
-	<div class="content">content</div>		
+	<div class="content">
+		content
+	</div>		
 	
 	<div class="right">right</div>
 	
 </div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+		$.ajax({
+			url:"http://localhost:3000/feedlist",
+			type: "get",
+			success: function(list){
+				
+				alert(JSON.stringify(list));
+				
+			},
+			error:function(){
+				alert('error');
+			}
+		});
+	
+});
+
+
+
+
+
+</script>
 </body>
 </html>

@@ -17,7 +17,7 @@
 			<img src="images/Ff8-zell.jpg" class="img-thumbnail1">			
 		</div>	
 	
-	<div id="profile-nickname">nicknameffffffff</div>
+	<div id="profile-nickname">nickname</div>
 	<div id="profile-birth">00/00</div>
 	<div id="profile-email">abc123@naver.com</div>
 	</div>
@@ -40,69 +40,16 @@
 		</div>	
 	</div>
 	<div class="content">content<br>
-		<!-- <div id='divContent'>
 		
-		</div>
-		<div id='listEnd'>
-			End of list. When this is visible new items will be added
-		</div> -->
 	</div>
 	
 	
 	
 	<div class="right">right</div>
 </div>
-<!-- <script type="text/javascript">
-	let divContent = document.getElementById('divContent');
-	let listEnd = document.getElementById('listEnd');
-	let itemCount = 0;
-	let appending = false;
-	
-	window.addEventListener('DOMContentLoaded', load);
-	function load(){
-		addItems();
-	}
-	
-	function addItems(){
-		appending = true;
-		for(let i=0; i<20; i++){
-			let item = generateDataBlock(['this is item #', itemCount].join(''))
-			divContent.appendChild(item);
-			itemCount++;
-		}
-		appending = false;
-	}
-	
-	function generateDataBlock(message){
-		let item = document.createElement('div');
-		item.setAttribute('class', 'item');
-		item.textContent = message;
-		return item;
-	}
-	
-	let options = {
-		root: null,
-		rootMargin: '0px',
-		threshold=1.0
-	};
-	
-	let callback = (entries, observer)=>{
-		entries.forEach(entry =>{
-			if(entry.target.id === 'listEnd'){
-				if(entry.isIntersecting && !appending){
-					appending = true;
-					setTimeout(() =>{
-						addItems()
-					}, 3000);
-				}
-			}
-		});
-	};
-	
-	
-	let observer = new IntersectionObserver(callback, options);
-	observer.observe(listEnd);
+<script type="text/javascript">
 
-</script> -->
+
+</script>
 </body>
 </html>
