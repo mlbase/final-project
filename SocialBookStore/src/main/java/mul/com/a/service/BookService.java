@@ -46,8 +46,8 @@ public class BookService {
 		return dao.bookcheck(title)>0?true:false;
 	}
 	
-	public BookDto getbook(String title) {
-		return dao.getbook(title);
+	public BookDto getbook(int seq) {
+		return dao.getbook(seq);
 	}
 	
 	public boolean postwish(WishDto dto) {

@@ -51,7 +51,7 @@
 		select seq, title, filename, writer, publisher, price, isbn, sort, genre, delivery_fee, 
 		amount, publish_date
 		from sbs_book
-		where title=#{title}
+		where seq=${seq}
 	</select>
 
 </mapper>
