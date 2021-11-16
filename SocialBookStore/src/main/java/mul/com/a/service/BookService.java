@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import mul.com.a.dao.BookDao;
 import mul.com.a.dto.BookDto;
 import mul.com.a.dto.OrderDto;
+import mul.com.a.dto.WishDto;
 
 @Transactional
 @Service
@@ -43,5 +44,17 @@ public class BookService {
 	
 	public boolean titlecheck(String title) {
 		return dao.bookcheck(title)>0?true:false;
+	}
+	
+	public BookDto getbook(String title) {
+		return dao.getbook(title);
+	}
+	
+	public boolean postwish(WishDto dto) {
+		return dao.postwish(dto)>0?true:false;
+	}
+	
+	public List<WishDto> wishlist(String id){
+		return dao.wishlist(id);
 	}
 }

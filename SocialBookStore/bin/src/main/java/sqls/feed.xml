@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.com.a.dao.FeedDao">
+	<insert id="postfeed" parameterType="mul.com.a.dto.FeedDto">
+		insert into sbs_feed(nickname, content, filename, tag, reg_date)
+		values( #{nickname}, #{content}, #{filename}, #{tag}, now())
+	</insert>
+	
+	<insert id="postcomment" parameterType="mul.com.a.dto.CommentDto">
+		insert into sbs_comment(nickname, content, feed_seq, reg_date)
+		values( #{nickname}, #{content}, #{feedSeq}, now())
+	</insert>
+	
+	<select id="feedlist" resultType="mul.com.a.dto.FeedDto">
+		select seq, nickname, content, filename, tag, reg_date
+		from sbs_feed
+	</select>
+	
+	<select id="commentlist" resultType="mul.com.a.dto.CommentDto">
+		select seq, nickname, content, feed_seq, reg_date
+		from sbs_comment
+		where feed_seq=#{feedSeq}
+	</select>
+	
+	<select id="myfeed" parameterType="java.lang.String" resultType="mul.com.a.dto.FeedDto">
+		SELECT SEQ, NICKNAME, CONTENT, FILENAME, TAG, REG_DATE
+		  FROM SBS_FEED
+		 WHERE NICKNAME = (SELECT NICKNAME FROM SBS_USER WHERE ID=#{ID})
+	</select>
+	
+	<select id="myfeed2" parameterType="hashMap" resultType="mul.com.a.dto.FeedDto">
+		SELECT TA.*
+		  FROM (SELECT RANK() OVER(ORDER BY FD.REG_DATE DESC) AS RNUM
+		             , COUNT(1) OVER() AS TOTCNT
+		             , SEQ
+		             , NICKNAME
+		             , CONTENT
+		             , FILENAME
+		             , TAG
+		             , REG_DATE
+		      FROM SBS_FEED FD
+		     WHERE FD.NICKNAME = (#{nickname})
+		)TA
+		WHERE RNUM >= (#{currentPage}*#{rowsperPage})-#{rowsperPage}+1
+		 <![CDATA[  
+		  AND RNUM <= #{currentPage}*#{rowsperPage}
+		  ]]>
+	</select>
+</mapper>

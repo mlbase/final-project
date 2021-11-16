@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mul.com.a.dto.BookDto;
 import mul.com.a.dto.OrderDto;
+import mul.com.a.dto.WishDto;
 import mul.com.a.service.BookService;
 
 @RestController
@@ -47,8 +48,20 @@ public class BookController {
 		return msg;
 	}
 	
+	@GetMapping(value="/book")
+	public BookDto getbook(String title) {
+		BookDto dto = service.getbook(title);
+		
+		if(dto==null) {
+			System.out.println("db에 없음");
+		}
+		
+		return dto;
+	}
+	
 	@PostMapping(value="/order")
 	public String createorder(OrderDto dto) {
+		//System.out.println(dto.toString());
 		String msg = "";
 		
 		boolean b = false;
@@ -62,12 +75,27 @@ public class BookController {
 		return msg;
 	}
 	
+	@PostMapping(value="/wish")
+	public String wish(WishDto dto) {
+		String msg = "";
+		
+		boolean b = false;
+		
+		b = service.postwish(dto);
+		
+		if(b) {
+			msg = "OK";
+		}
+	
+		return msg;
+	}
+	
 	@GetMapping(value="/booklist")
 	public List<BookDto> booklist() {
 		List<BookDto> list = service.booklist();
-		for (BookDto dto : list) {
+		/*for (BookDto dto : list) {
 			System.out.println(dto.toString());
-		}
+		}*/
 		return list;
 	}
 	
@@ -78,6 +106,12 @@ public class BookController {
 		return list;
 	}
 	
+	@GetMapping(value="/wishlist")
+	public List<WishDto> wishlist(String id) {
+		List<WishDto> list = service.wishlist(id);
+		
+		return list;
+	}
 	
 	
 	

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.com.a.dao.SocialDao">
+	<select id="feedlikecount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*)
+		from sbs_like
+		where feed_seq=(select seq from sbs_feed where seq=#{feedSeq})
+	</select>
+	
+	<select id="commentlikecount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*)
+		from sbs_like
+		where comment_seq=(select seq from sbs_comment where seq=#{commentSeq})
+	</select>
+	
+	<select id="feedlikeinspect" parameterType="mul.com.a.dto.LikeDto" resultType="java.lang.Integer">
+		select count(*)
+		from sbs_like
+		where nickname=#{nickname} and feed_seq=${feedSeq}
+	</select>
+	
+	<select id="commentlikeinspect" parameterType="mul.com.a.dto.LikeDto" resultType="java.lang.Integer">
+		select count(*)
+		from sbs_like
+		where nickname=#{nickname} and comment_seq=${commentSeq}
+	</select>
+	
+	<select id="messagelist" parameterType="java.lang.String" resultType="mul.com.a.dto.MessageDto">
+		select seq, send_id, receive_id, content, reg_date
+		from sbs_message
+		where send_id = #{id} or receive_id = #{id}
+	</select>
+	
+	<insert id="postmessage" parameterType="mul.com.a.dto.MessageDto">
+		insert into sbs_message(send_id, recieve_id, content, reg_date)
+		values(#{sendId}, #{recieveId}, #{content}, now())
+	</insert>
+	
+	<insert id="postlike" parameterType="mul.com.a.dto.LikeDto">
+		insert into sbs_like(nickname, is_like, comment_seq, feed_seq)
+		values(#{nickname}, ${isLike}, ${commentSeq}, ${feedSeq})
+	</insert>
+
+</mapper>
