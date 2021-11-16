@@ -49,8 +49,8 @@ public class BookController {
 	}
 	
 	@GetMapping(value="/book")
-	public BookDto getbook(String title) {
-		BookDto dto = service.getbook(title);
+	public BookDto getbook(int seq) {
+		BookDto dto = service.getbook(seq);
 		
 		if(dto==null) {
 			System.out.println("db에 없음");

@@ -23,7 +23,7 @@ public interface BookDao {
 	
 	int bookcheck(String title);
 	
-	BookDto getbook(String title);
+	BookDto getbook(int seq);
 	
 	int postwish(WishDto dto);
 	
