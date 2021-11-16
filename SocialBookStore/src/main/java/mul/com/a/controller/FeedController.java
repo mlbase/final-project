@@ -1,11 +1,14 @@
 package mul.com.a.controller;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import mul.com.a.dto.CommentDto;
@@ -43,10 +46,23 @@ public class FeedController {
 	}
 	
 	@GetMapping(value="/myfeed")
-	public List<FeedDto> myfeed(String id) {
-		List<FeedDto> list = null;
+	public List<FeedDto> myfeed(
+		@RequestParam(value="nickname", defaultValue = "") String nickname,
+		@RequestParam(value="currentPage", defaultValue = "1") int currentPage,
+		@RequestParam(value="rowsperPage", defaultValue = "10") int rowsperPage
+		) {
+//		list = service.myfeed(id);
 		
-		list = service.myfeed(id);
+		
+		if("".equals(nickname)) {
+			return null;
+		}
+		Map<String,Object> map = new HashMap();
+		map.put("currentPage", currentPage);
+		map.put("rowsperPage", rowsperPage);
+		map.put("nickname", nickname);
+		List<FeedDto> list = null;
+		list = service.myfeed2(map);
 		
 		return list;
 	}

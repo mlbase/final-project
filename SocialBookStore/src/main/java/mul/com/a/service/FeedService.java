@@ -1,6 +1,7 @@
 package mul.com.a.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,6 +28,10 @@ public class FeedService {
 	
 	public List<FeedDto> myfeed(String id){
 		return dao.myfeed(id);
+	}
+	
+	public List<FeedDto> myfeed2(Map<String, Object> map){
+		return dao.myfeed2(map);
 	}
 	
 	public boolean postcomment(CommentDto dto) {
