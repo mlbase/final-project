@@ -24,8 +24,27 @@
 	</select>
 	
 	<select id="myfeed" parameterType="java.lang.String" resultType="mul.com.a.dto.FeedDto">
-		select seq, nickname, content, filename, tag, reg_date
-		from sbs_feed
-		where nickname = (select nickname from sbs_user where id=#{id})
+		SELECT SEQ, NICKNAME, CONTENT, FILENAME, TAG, REG_DATE
+		  FROM SBS_FEED
+		 WHERE NICKNAME = (SELECT NICKNAME FROM SBS_USER WHERE ID=#{ID})
+	</select>
+	
+	<select id="myfeed2" parameterType="hashMap" resultType="mul.com.a.dto.FeedDto">
+		SELECT TA.*
+		  FROM (SELECT RANK() OVER(ORDER BY FD.REG_DATE DESC) AS RNUM
+		             , COUNT(1) OVER() AS TOTCNT
+		             , SEQ
+		             , NICKNAME
+		             , CONTENT
+		             , FILENAME
+		             , TAG
+		             , REG_DATE
+		      FROM SBS_FEED FD
+		     WHERE FD.NICKNAME = #{nickname}
+		)TA
+		WHERE RNUM >= (#{currentPage}*#{rowsperPage})-#{rowsperPage}+1
+		 <![CDATA[  
+		  AND RNUM <= #{currentPage}*#{rowsperPage}
+		  ]]>
 	</select>
 </mapper>

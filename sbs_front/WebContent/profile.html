@@ -41,8 +41,8 @@
 		</div>	
 	</div>
 	<div class="content">content<br>
-		 <ul class="infinite-list">infinite list</ul>
-		 <div id=json></div>
+		 <ul class="infinite-list">최신 feed</ul>
+		
 	</div>
 	
 	
@@ -51,42 +51,87 @@
 </div>
 <script type="text/javascript">
 const listElm = document.querySelector('.infinite-list');
-let itemNum = 1;
 
-const loadMoreList = () => {
-  for (let i = 0; i < 10; i++) {
-    const item = document.createElement('li');
-    item.innerText = 'Item ' + itemNum++;
-    listElm.appendChild(item);
-  }
-}
+let parsing = location.href.split("?");
 
 listElm.addEventListener('scroll', () => {
   if(listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
-    loadMoreList();
+	  getNextFeed();
   }
 });
 
-// Initially load items
-loadMoreList();
-
+var currentPage = 1;
+var rowsPerPage = 10;
+var totalCnt = 0;
 $(document).ready(function(){
+	getNextFeed()
+});
+
+function getNextFeed(){
+	if(currentPage != 1 && Math.ceil(totalCnt/rowsPerPage) < currentPage){
+		return;
+	}
+	var params = {"currentPage" : currentPage,
+				  "nickname" 		  : parsing[1],
+				  "rowsPerPage" : rowsPerPage
+				 };
+	
 	
 	$.ajax({
-		url:"http://localhost:3000/myfeed?id=test1",
+		url:"http://localhost:3000/myfeed?"+jQuery.param(params),
 		type: "get",
 		success: function(list){
 			
-			alert(JSON.stringify(list));
-			document.getElementById('json').innerHTML=JSON.stringify(list);
+			totalCnt = list[0].totcnt;
+			var html = [];
+			$.each(list, function(index, item){ 
+				
+				let likecount = "";
+				likecount =String(getLike(item.seq));
+				html.push("<div>")
+				html.push("등록일자 : "+ item.regDate+"<br>");
+				html.push("<a href='profile.html?"+item.nickname + "'>닉네임 :" + item.nickname+ "</a><br>");
+				html.push("내용 : " + item.content+"<br>");
+				html.push("좋아요 : " +likecount+ "<br>");
+				html.push("태그 : " + item.tag);
+				html.push("<input  onclick='comment_pop("+String(item.seq) + ")' type=button value='댓글보기'>")
+				html.push("</div>");
+			});
+			
+			$('.infinite-list').append(html.join(''));
+			currentPage++;
+//			alert(JSON.stringify(list));
+// 			document.getElementById('json').innerHTML=JSON.stringify(list);
 			
 		},
 		error:function(){
 			alert('error');
 		}
 	});
+}
+function getLike(seq){
+	$.ajax({
+		url:"http://localhost:3000/feedlike",
+		type:"get",
+		data : { "seq":seq },
+		success:function(resp){
+			return resp;
+		}
+		
+	});
+}
+function like(){
+	$.ajax({
+		url:"http://localhost:3000/like",
+		type:"post",
+		data : {}
+	});
+}
+function comment_pop(seq) {
+	window.open("comment.html?"+seq , '댓글보기', 'top=10, left=10, width=500, height=600, status=no, menubar=no')
+};
+	
 
-});
 </script>
 </body>
 </html>
