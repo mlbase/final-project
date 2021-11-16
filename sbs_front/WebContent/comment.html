@@ -12,8 +12,54 @@
 	
 	</div>
 	<div class="write-comment">
-	<input type="teatarea"><input type="submit" value="작성">
+	<form id="frm">
+	<span>nickname</span>
+	<textarea name="content"></textarea>
+	<input type=hidden id=feed_seq name=feed_seq>
+	<button type="button" id="postcomment">작성</button>
+	</form>
 	</div>
+<!--보내야할 정보 1.nickname, content, feed_seq, reg_date  -->	
 </div>
+<script type="text/javascript">
+let parsing = location.href.split("?");
+alert(parsing[1]);
+document.getElementById('feed_seq').innerHTML=parsing[1]
+
+$(document).ready(function(){
+	$("#postcomment").on("click", function(){
+		let params = $("#frm").serialize();
+		
+		$.ajax({
+			url:"http://localhost:3000/comment",
+			type:"post",
+			data:params,
+			success:function(resp){
+				if(resp == "OK"){	
+					alert("feed 업로드에 성공했습니다.");	
+				}else{
+					alert("feed 업로드에 실패했습니다.");
+				}			
+			},
+			error:function(){
+				alert('error');
+			}
+		});
+		
+	});
+});
+
+$.ajax({
+	url:"http://localhost:3000/comment?"+parsing[1],
+	type:"get",
+	success: function(list){
+		alert(JSON.stringify(list));
+	},
+	error:function(){
+		alert('error');
+	}
+});
+
+</script>
 </body>
 </html>
