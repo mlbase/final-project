@@ -8,6 +8,9 @@ public class FeedDto {
 	private String filename;
 	private String tag;
 	private String regDate;
+
+	private String rnum;
+	private String totcnt;
 	
 	public FeedDto(){}
 
@@ -73,6 +76,22 @@ public class FeedDto {
 	public String toString() {
 		return "FeedDto [seq=" + seq + ", nickname=" + nickname + ", content=" + content + ", filename=" + filename
 				+ ", tag=" + tag + ", regDate=" + regDate + "]";
+	}
+
+	public String getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
+	}
+
+	public String getTotcnt() {
+		return totcnt;
+	}
+
+	public void setTotcnt(String totcnt) {
+		this.totcnt = totcnt;
 	}
 	
 	
