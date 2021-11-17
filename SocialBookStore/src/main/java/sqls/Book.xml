@@ -29,6 +29,69 @@
 		select *
 		from sbs_book
 	</select>
+	<select id="booklistgenre">
+		select TB.*
+		from ( select rank() over(order by reg_date desc)  as RNUM,
+				COUNT(*) OVER() AS TOTCNT,
+				SEQ,
+				TITLE,
+				FILENAME,
+				WRITER,
+				PUBLISHER,
+				PRICE,
+				ISBN,
+				REG_DATE,
+				PUBLISH_DATE,
+				DELIVERY_FEE,
+				GENRE,
+				AMOUNT
+				FROM SBS_BOOK) AS TB
+				<if test="choice=='title'">
+				WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+				</if>
+				<if test="choice=='writer'">
+				WHERE WRITER LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+				</if>
+				<if test="choice=='content'">
+				WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+				</if>
+				AND RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1
+		 		<![CDATA[  
+		  		AND RNUM <= #{currentpage}*#{rowsperpage}
+		  		]]>
+	</select>
+	<select id="booklistsort" resultType="mul.com.a.dto.BookDto">
+		select TB.*
+		from ( select rank() over(order by reg_date desc)  as RNUM,
+				COUNT(*) OVER() AS TOTCNT,
+				SEQ,
+				TITLE,
+				FILENAME,
+				WRITER,
+				PUBLISHER,
+				PRICE,
+				ISBN,
+				REG_DATE,
+				PUBLISH_DATE,
+				DELIVERY_FEE,
+				SORT,
+				AMOUNT
+				FROM SBS_BOOK) AS TB
+				<if test="choice=='title'">
+				WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+				</if>
+				<if test="choice=='writer'">
+				WHERE WRITER LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+				</if>
+				<if test="choice=='content'">
+				WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+				</if>
+				AND RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1
+		 		<![CDATA[  
+		  		AND RNUM <= #{currentpage}*#{rowsperpage}
+		  		]]>
+		 
+	</select>
 	
 	<select id="orderlist" resultType="mul.com.a.dto.OrderDto">
 		select id, book_seq, order_date, address, delivery_fee, book_count, price

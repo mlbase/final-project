@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mul.com.a.dto.BookDto;
+import mul.com.a.dto.Bookparam;
 import mul.com.a.dto.OrderDto;
 import mul.com.a.dto.WishDto;
 import mul.com.a.service.BookService;
@@ -93,6 +94,15 @@ public class BookController {
 	@GetMapping(value="/booklist")
 	public List<BookDto> booklist() {
 		List<BookDto> list = service.booklist();
+		/*for (BookDto dto : list) {
+			System.out.println(dto.toString());
+		}*/
+		return list;
+	}
+	
+	@GetMapping(value="/booklistsort")
+	public List<BookDto> booklistsort(Bookparam param) {
+		List<BookDto> list = service.booklistsort(param);
 		/*for (BookDto dto : list) {
 			System.out.println(dto.toString());
 		}*/
