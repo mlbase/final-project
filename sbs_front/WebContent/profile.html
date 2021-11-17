@@ -18,7 +18,7 @@
 			<img src="images/Ff8-zell.jpg" class="img-thumbnail1">			
 		</div>	
 	
-	<div id="profile-nickname">nickname</div>
+	<div id="profile-nickname"></div>
 	<div id="profile-birth">00/00</div>
 	<div id="profile-email">abc123@naver.com</div>
 	</div>
@@ -50,10 +50,18 @@
 	<div class="right">right</div>
 </div>
 <script type="text/javascript">
-const listElm = document.querySelector('.infinite-list');
-
 let parsing = location.href.split("?");
+let ses = JSON.parse(sessionStorage.getItem("login"));
+$("#profile-nickname").html(ses.nickname);
+$("#profile-birth").html(ses.birth);
+$("#profile-email").html(ses.email);
+$("#intro").html(ses.introduce);
 
+//alert(JSON.stringify(ses));
+
+
+
+const listElm = document.querySelector('.infinite-list');
 listElm.addEventListener('scroll', () => {
   if(listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
 	  getNextFeed();
@@ -85,14 +93,15 @@ function getNextFeed(){
 			totalCnt = list[0].totcnt;
 			var html = [];
 			$.each(list, function(index, item){ 
-				
+				let nickname = String(ses.nickname);
 				let likecount = "";
 				likecount =String(getLike(item.seq));
 				html.push("<div>")
 				html.push("등록일자 : "+ item.regDate+"<br>");
 				html.push("<a href='profile.html?"+item.nickname + "'>닉네임 :" + item.nickname+ "</a><br>");
 				html.push("내용 : " + item.content+"<br>");
-				html.push("좋아요 : " +likecount+ "<br>");
+				html.push("좋아요 : " +likecount+"&nbsp;");
+				html.push("<button onclick='likebtn(`"+nickname+"`,`"+item.seq+ "`)'>좋아요</button><br>");
 				html.push("태그 : " + item.tag);
 				html.push("<input  onclick='comment_pop("+String(item.seq) + ")' type=button value='댓글보기'>")
 				html.push("</div>");
@@ -129,6 +138,28 @@ function like(){
 }
 function comment_pop(seq) {
 	window.open("comment.html?"+seq , '댓글보기', 'top=10, left=10, width=500, height=600, status=no, menubar=no')
+};
+
+function likebtn(nickname, feedSeq) {
+	$.ajax({
+		url:"http://localhost:3000/like",
+		type:"post",
+		data : {"nickname":nickname, "feedSeq":this.feedSeq, "isLike": 1},
+		success: function(resp){
+			alert(resp);
+			if(resp == 'OK'){
+				alert("좋아요를 누르셨습니다.");
+			}
+			if(resp == 'already'){
+				alert("이미 좋아요를 누르셨습니다.");
+			}
+			
+		},
+		error: function(){
+			alert(error);
+		}
+
+	})
 };
 	
 

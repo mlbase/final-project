@@ -13,20 +13,26 @@
 	</div>
 	<div class="write-comment">
 	<form id="frm">
-	<span>nickname</span>
+	<span id=name></span>
+	<input type="hidden" id="nickname" name="nickname">
 	<textarea name="content"></textarea>
-	<input type=hidden id=feed_seq name=feed_seq>
+	<input type=hidden id=feedSeq name=feedSeq>
 	<button type="button" id="postcomment">작성</button>
 	</form>
 	</div>
 <!--보내야할 정보 1.nickname, content, feed_seq, reg_date  -->	
 </div>
 <script type="text/javascript">
+let ses = JSON.parse(sessionStorage.getItem("login"));
+//alert(JSON.stringify(ses));
+
 let parsing = location.href.split("?");
-alert(parsing[1]);
-document.getElementById('feed_seq').innerHTML=parsing[1]
+//alert(parsing[1]);
+$("#feedSeq").val(parsing[1]);
 
 $(document).ready(function(){
+	$("#name").html(ses.nickname);
+	$("#nickname").val(ses.nickname);
 	$("#postcomment").on("click", function(){
 		let params = $("#frm").serialize();
 		
@@ -36,9 +42,9 @@ $(document).ready(function(){
 			data:params,
 			success:function(resp){
 				if(resp == "OK"){	
-					alert("feed 업로드에 성공했습니다.");	
+					alert("comment 업로드에 성공했습니다.");	
 				}else{
-					alert("feed 업로드에 실패했습니다.");
+					alert("comment 업로드에 실패했습니다.");
 				}			
 			},
 			error:function(){
@@ -50,10 +56,19 @@ $(document).ready(function(){
 });
 
 $.ajax({
-	url:"http://localhost:3000/comment?"+parsing[1],
+	url:"http://localhost:3000/comment?feedSeq="+parsing[1],
 	type:"get",
 	success: function(list){
 		alert(JSON.stringify(list));
+		var html = [];
+		$.each(list, function(index, item){
+			html.push("<div>")
+			html.push("작성자:"+item.nickname+"<br>");
+			html.push("내용:"+item.content+"<br>");
+			html.push("작성시간:"+item.regDate+"<br>");
+			html.push("</div>")
+		})
+		$('.comments').append(html.join(''));
 	},
 	error:function(){
 		alert('error');
