@@ -67,6 +67,13 @@ public class SocialController {
 		return msg;
 	}
 	
+	@PostMapping(value="/following")
+	public String following(String nickname1, String nickname2) {
+		String msg ="";
+		
+		return msg;
+	}
+	
 	@GetMapping(value="/message")
 	public List<MessageDto> getmessage(String id){
 		List<MessageDto> list = null;

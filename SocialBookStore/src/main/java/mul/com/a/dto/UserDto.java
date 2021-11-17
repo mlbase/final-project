@@ -14,14 +14,18 @@ public class UserDto {
 	private String address;
 	private String regDate;
 	private int auth;
+	private String filename;
+	private String introduce;
 	
 	public UserDto() {}
 
 	
 	
 
+
+
 	public UserDto(int seq, String id, String pwd, String email, String following, String follower, String nickname,
-			String birth, String name, String address, String regDate, int auth) {
+			String birth, String name, String address, String regDate, int auth, String filename, String introduce) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -35,7 +39,14 @@ public class UserDto {
 		this.address = address;
 		this.regDate = regDate;
 		this.auth = auth;
+		this.filename = filename;
+		this.introduce = introduce;
 	}
+
+
+
+
+
 
 
 
@@ -145,12 +156,56 @@ public class UserDto {
 		this.auth = auth;
 	}
 
+
+
+
+
+
+	public String getFilename() {
+		return filename;
+	}
+
+
+
+
+
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+
+
+
+
+
+	public String getIntroduce() {
+		return introduce;
+	}
+
+
+
+
+
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "UserDto [seq=" + seq + ", id=" + id + ", pwd=" + pwd + ", email=" + email + ", following=" + following
 				+ ", follower=" + follower + ", nickname=" + nickname + ", birth=" + birth + ", name=" + name
-				+ ", address=" + address + ", regDate=" + regDate + ", auth=" + auth + "]";
+				+ ", address=" + address + ", regDate=" + regDate + ", auth=" + auth + ", filename=" + filename
+				+ ", introduce=" + introduce + "]";
 	}
+
+	
 	
 	
 }

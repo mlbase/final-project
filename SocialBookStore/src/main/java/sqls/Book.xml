@@ -98,10 +98,10 @@
 		from sbs_order
 	</select>
 	
-	<select id="wishlist" resultType="mul.com.a.dto.WishDto">
-		select id, book_seq, delivery_fee, book_count, price
-		from sbs_wishlist
-		where id=#{id}
+	<select id="wishlist" parameterType="java.lang.String" resultType="mul.com.a.dto.WishDto">
+		select a.id, a.book_seq, a.delivery_fee, a.book_count, a.price, b.title, b.writer, b.filename
+		from sbs_wishlist as a, sbs_book as b 
+		where id=#{id} and a.book_seq = b.seq;
 	</select>
 	
 	<select id="bookcheck" parameterType="java.lang.String" resultType="java.lang.Integer">

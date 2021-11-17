@@ -17,13 +17,13 @@
 	<select id="feedlikeinspect" parameterType="mul.com.a.dto.LikeDto" resultType="java.lang.Integer">
 		select count(*)
 		from sbs_like
-		where nickname=#{nickname} and feed_seq=${feedSeq}
+		where nickname=#{nickname} and feed_seq=${feedSeq} and feed_seq>0
 	</select>
 	
 	<select id="commentlikeinspect" parameterType="mul.com.a.dto.LikeDto" resultType="java.lang.Integer">
 		select count(*)
 		from sbs_like
-		where nickname=#{nickname} and comment_seq=${commentSeq}
+		where nickname=#{nickname} and comment_seq=${commentSeq} and comment_seq>0
 	</select>
 	
 	<select id="messagelist" parameterType="java.lang.String" resultType="mul.com.a.dto.MessageDto">
