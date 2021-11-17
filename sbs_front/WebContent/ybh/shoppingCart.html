@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>장바구니 수량 변경 및 합계 구하기</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="shoppingCart.css" />
+<script type="text/javascript" src="shoppingCart.js"></script>
+</head>
+<body>
+
+
+	 <form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
+    
+            <input type="hidden" name="cmd" value="order">
+            <div class="basketdiv" id="basket">
+                <div class="row head">
+                    <div class="subdiv">
+                        <div class="check">선택</div>
+                        <div class="img">이미지</div>
+                        <div class="pname">상품명</div>
+                    </div>
+                    <div class="subdiv">
+                        <div class="basketprice">가격</div>
+                        <div class="num">수량</div>
+                        <div class="sum">합계</div>
+                    </div>
+                    <div class="subdiv">
+    
+                        <div class="basketcmd">삭제</div>
+                    </div>
+                    <div class="split"></div>
+                </div>
+        
+                <div class="row data">
+                    <div class="subdiv">
+                        <div class="check"><input type="checkbox" name="buy" value="260" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+                        <div class="img"><img src="./img/basket1.jpg" width="60"></div>
+                        <div class="pname">
+                            <span id=booktitle1></span>
+                        </div>
+                    </div>
+                    <div class="subdiv">
+                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="p_price1"></div>
+                        <div class="num">
+                            <div class="updown">
+                                <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="2" onkeyup="javascript:basket.changePNum(1);">
+                                <span onclick="javascript:basket.changePNum(1);"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+                                <span onclick="javascript:basket.changePNum(1);"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+                            </div>
+                        </div>
+                        <div class="sum" ></div>
+                    </div>
+                    <div class="subdiv">
+                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>
+                    </div>
+                </div>
+                <div class="row data">
+                    <div class="subdiv">
+                        <div class="check"><input type="checkbox" name="buy" value="261" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+                        <div class="img"><img src="./img/basket2.jpg" width="60"></div>
+                        <div class="pname">
+                            <span id=booktitle3></span>
+                        </div>
+                    </div>
+                    <div class="subdiv">
+                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price3" class="p_price" value="p_price3"></div>
+                        <div class="num">
+                            <div class="updown">
+                                <input type="text" name="p_num2" id="p_num2" size="2" maxlength="4" class="p_num" value="1" onkeyup="javascript:basket.changePNum(2);">
+                                <span onclick="javascript:basket.changePNum(2);"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+                                <span onclick="javascript:basket.changePNum(2);"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+                            </div>
+                        </div>
+                        <div class="sum"></div>
+                    </div>
+                    <div class="subdiv">
+                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>
+                    </div>
+                </div>
+                <div class="row data">
+                    <div class="subdiv">
+                        <div class="check"><input type="checkbox" name="buy" value="262" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+                        <div class="img"><img src="./img/basket3.jpg" width="60"></div>
+                        <div class="pname">
+                            <span id=booktitle4></span>
+                        </div>
+                    </div>
+                    <div class="subdiv">
+                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price4" class="p_price" value="p_price4"></div>
+                        <div class="num">
+                            <div class="updown">
+                                <input type="text" name="p_num3" id="p_num3" size="2" maxlength="4" class="p_num" value="1" onkeyup="javascript:basket.changePNum(3);">
+                                <span onclick="javascript:basket.changePNum(3);"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+                                <span onclick="javascript:basket.changePNum(3);"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+                            </div>
+                        </div>
+                        <div class="sum"></div>
+                    </div>
+                    <div class="subdiv">
+                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>
+                    </div>
+                </div>
+        
+            </div>
+    
+            <div class="right-align basketrowcmd">
+                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
+                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">장바구니비우기</a>
+            </div>
+    
+            <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: 4개</div>
+            <div class="bigtext right-align box blue summoney" id="sum_p_price">합계금액: 74,200원</div>
+    
+            <div id="goorder" class="">
+                <div class="clear"></div>
+                <div class="buttongroup center-align cmd">
+                    <a href="javascript:void(0);">선택한 상품 주문</a>
+                </div>
+            </div>
+        </form>
+
+					
+				
+	
+	
+<script type="text/javascript">
+/*$(document).ready(function(){
+	//$("#checkbtn").click(function () {
+		$("#seq").val(resp.seq);
+				$("#writer").html(resp.writer);
+				$("#publisher").html(resp.publisher);
+				$("#price").html(resp.price);
+				$("#isbn").html(resp.isbn);
+				$("#publishDate").html(resp.publishDate);
+				$("#delivery_fee").html(resp.deliveryFee);
+				$("#sort").html(resp.sort);
+				$("#genre").html(resp.genre);
+				$("#price").val(resp.price);
+				$("#deliveryFee").val(resp.deliveryFee);
+				//alert($("#sum_1").attr());
+				$("#seq").val(resp.seq);
+				$("#writer").html(resp.writer);
+				$("#publisher").html(resp.publisher);
+				$("#price").html(resp.price);
+				$("#isbn").html(resp.isbn);
+				$("#publishDate").html(resp.publishDate);
+				$("#delivery_fee").html(resp.deliveryFee);
+				$("#sort").html(resp.sort);
+				$("#genre").html(resp.genre);
+				$("#price").val(resp.price);
+				$("#deliveryFee").val(resp.deliveryFee);
+				
+				//$("#booktitle").text(resp[0].title);
+			
+				$("#booktitle1").html(resp[0].title);			
+				$("#p_price1").val(resp[0].price);
+				$("#sum_1").val(resp[0].price);
+				
+			
+				$("#booktitle2").html(resp[1].title+"/ "+resp[1].writer);			
+				$("#p_price2").val(resp[1].price);
+				$("#sum_2").val(resp[1].price);
+				
+				$("#booktitle3").html(resp[2].title+"/ "+resp[2].writer);			
+				$("#p_price3").val(resp[2].price);
+				$("#sum_3").val(resp[2].price);
+				
+				$("#booktitle4").html(resp[3].title+"/ "+resp[3].writer);			
+				$("#p_price4").val(resp[3].price);
+				$("#sum_4").val(resp[3].price);
+				
+				
+				
+				var obj={};
+				$.each(obj,function(index,item){
+					item.push("<");
+				});
+				
+				
+			},
+			error:function(){
+				alert('error');
+			}
+		});
+		
+	});
+*/
+</script>
+
+
+
+
+
+<script type="text/javascript">
+	//$("#checkbtn").click(function () {
+		$.ajax({
+			
+			url:"http://localhost:3000/wishlist",
+			type:"get",
+			data:{ id : "test" },	
+			success:function( resp ){
+				alert(JSON.stringify(resp));
+				$("#book_count").html(resp.book_count);
+				$("#book_seq").html(resp.book_seq);
+				$("#delivery_fee").html(resp.delivery_fee);
+				$("#id").html(resp.id);
+				$("#price").html(resp.price);
+				$("#seq").html(resp.seq);
+				
+				
+				$().each(resp, function(index, item){
+					$(".rawdata").html()
+				});
+				
+				
+			
+				
+				
+			},
+			error:function(){
+				alert('error');
+			}
+		});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
