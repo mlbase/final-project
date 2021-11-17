@@ -30,6 +30,27 @@ let parsing = location.href.split("?");
 //alert(parsing[1]);
 $("#feedSeq").val(parsing[1]);
 
+function getLike(seq){
+	let result = 0;
+	
+	$.ajax({
+		url:"http://localhost:3000/commentlike",
+		type:"get",
+		async:false,
+		data : { "seq":seq },
+		success:function(resp){
+			
+			result = resp;
+		},
+		error:function(){
+			alert(error);
+		}
+		
+	});
+	
+	return result;
+}
+
 $(document).ready(function(){
 	$("#name").html(ses.nickname);
 	$("#nickname").val(ses.nickname);
@@ -62,10 +83,14 @@ $.ajax({
 		alert(JSON.stringify(list));
 		var html = [];
 		$.each(list, function(index, item){
+			let nickname = String(ses.nickname);
+			let likecount = getLike(item.seq);
 			html.push("<div>")
 			html.push("작성자:"+item.nickname+"<br>");
 			html.push("내용:"+item.content+"<br>");
 			html.push("작성시간:"+item.regDate+"<br>");
+			html.push("좋아요:" +likecount+"&nbsp;");
+			html.push("<button onclick='likebtn(`"+nickname+"`,`"+item.seq+ "`)'>좋아요</button><br>");
 			html.push("</div>")
 		})
 		$('.comments').append(html.join(''));
@@ -74,6 +99,29 @@ $.ajax({
 		alert('error');
 	}
 });
+
+function likebtn(nickname, commentSeq) {
+	$.ajax({
+		url:"http://localhost:3000/like",
+		type:"post",
+		data : {"nickname":nickname, "commentSeq":commentSeq, "isLike": 1},
+		success: function(resp){
+			alert(resp);
+			if(resp == 'OK'){
+				alert("좋아요를 누르셨습니다.");
+			}
+			if(resp == 'already'){
+				alert("이미 좋아요를 누르셨습니다.");
+			}
+			
+		},
+		error: function(){
+			alert(error);
+		}
+
+	})
+};
+	
 
 </script>
 </body>

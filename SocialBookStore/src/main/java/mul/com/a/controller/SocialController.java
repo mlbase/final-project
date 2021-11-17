@@ -29,6 +29,7 @@ public class SocialController {
 	
 	@PostMapping(value="/like")
 	public String like(LikeDto dto) {
+		System.out.println(dto.toString());
 		String msg = "";
 		
 		boolean b = false;

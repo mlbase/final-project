@@ -58,7 +58,26 @@ $("#profile-email").html(ses.email);
 $("#intro").html(ses.introduce);
 
 //alert(JSON.stringify(ses));
-
+function getLike(seq){
+	let result = 0;
+	
+	$.ajax({
+		url:"http://localhost:3000/feedlike",
+		type:"get",
+		async:false,
+		data : { "seq":seq },
+		success:function(resp){
+			
+			result = resp;
+		},
+		error:function(){
+			alert(error);
+		}
+		
+	});
+	
+	return result;
+}
 
 
 const listElm = document.querySelector('.infinite-list');
@@ -94,9 +113,9 @@ function getNextFeed(){
 			var html = [];
 			$.each(list, function(index, item){ 
 				let nickname = String(ses.nickname);
-				let likecount = "";
-				likecount =String(getLike(item.seq));
-				html.push("<div>")
+				let likecount = getLike(item.seq);
+				
+				html.push("<div>");
 				html.push("등록일자 : "+ item.regDate+"<br>");
 				html.push("<a href='profile.html?"+item.nickname + "'>닉네임 :" + item.nickname+ "</a><br>");
 				html.push("내용 : " + item.content+"<br>");
@@ -118,24 +137,8 @@ function getNextFeed(){
 		}
 	});
 }
-function getLike(seq){
-	$.ajax({
-		url:"http://localhost:3000/feedlike",
-		type:"get",
-		data : { "seq":seq },
-		success:function(resp){
-			return resp;
-		}
-		
-	});
-}
-function like(){
-	$.ajax({
-		url:"http://localhost:3000/like",
-		type:"post",
-		data : {}
-	});
-}
+
+
 function comment_pop(seq) {
 	window.open("comment.html?"+seq , '댓글보기', 'top=10, left=10, width=500, height=600, status=no, menubar=no')
 };
@@ -144,9 +147,9 @@ function likebtn(nickname, feedSeq) {
 	$.ajax({
 		url:"http://localhost:3000/like",
 		type:"post",
-		data : {"nickname":nickname, "feedSeq":this.feedSeq, "isLike": 1},
+		data : {"nickname":nickname, "feedSeq":feedSeq, "isLike": 1},
 		success: function(resp){
-			alert(resp);
+			//alert(resp);
 			if(resp == 'OK'){
 				alert("좋아요를 누르셨습니다.");
 			}
