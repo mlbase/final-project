@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="login"	resultType="mul.com.a.dto.UserDto">
-		select seq, id, email, nickname, birth, name, address, reg_date, auth
+		select seq, id, email, nickname, birth, name, address, reg_date, auth, introduce, filename
 		from sbs_user
 		where id=#{id} and pwd=#{pwd}
 	</select>
