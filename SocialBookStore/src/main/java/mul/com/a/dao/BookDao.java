@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import mul.com.a.dto.BookDto;
+import mul.com.a.dto.Bookparam;
 import mul.com.a.dto.OrderDto;
 import mul.com.a.dto.WishDto;
 
@@ -28,4 +29,6 @@ public interface BookDao {
 	int postwish(WishDto dto);
 	
 	List<WishDto> wishlist(String id);
+	
+	List<BookDto> booklistsort(Bookparam param);
 }

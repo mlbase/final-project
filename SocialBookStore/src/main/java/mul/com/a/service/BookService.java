@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mul.com.a.dao.BookDao;
 import mul.com.a.dto.BookDto;
+import mul.com.a.dto.Bookparam;
 import mul.com.a.dto.OrderDto;
 import mul.com.a.dto.WishDto;
 
@@ -56,5 +57,9 @@ public class BookService {
 	
 	public List<WishDto> wishlist(String id){
 		return dao.wishlist(id);
+	}
+	
+	public List<BookDto> booklistsort(Bookparam param){
+		return dao.booklistsort(param);
 	}
 }
