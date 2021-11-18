@@ -31,4 +31,10 @@ public interface BookDao {
 	List<WishDto> wishlist(String id);
 	
 	List<BookDto> booklistsort(Bookparam param);
+	
+	int bookcountsort(Bookparam param);
+	
+	int bookcountgenre(Bookparam param);
+	
+	List<BookDto> booklistgenre(Bookparam param);
 }

@@ -29,7 +29,7 @@
 		select *
 		from sbs_book
 	</select>
-	<select id="booklistgenre">
+	<select id="booklistgenre" resultType="mul.com.a.dto.BookDto">
 		select TB.*
 		from ( select rank() over(order by reg_date desc)  as RNUM,
 				COUNT(*) OVER() AS TOTCNT,
@@ -44,7 +44,8 @@
 				PUBLISH_DATE,
 				DELIVERY_FEE,
 				GENRE,
-				AMOUNT
+				AMOUNT,
+				CONTENT
 				FROM SBS_BOOK) AS TB
 				<if test="choice=='title'">
 				WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
@@ -74,6 +75,7 @@
 				REG_DATE,
 				PUBLISH_DATE,
 				DELIVERY_FEE,
+				CONTENT,
 				SORT,
 				AMOUNT
 				FROM SBS_BOOK) AS TB
@@ -115,6 +117,33 @@
 		amount, publish_date
 		from sbs_book
 		where seq=${seq}
+	</select>
+
+	<select id="bookcountsort" resultType="java.lang.Integer">
+		select count(*)
+		from sbs_book
+		<if test="choice=='title'">
+			WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+		</if>
+		<if test="choice=='writer'">
+			WHERE WRITER LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+		</if>
+		<if test="choice=='content'">
+			WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+		</if>
+	</select>
+	<select id="bookcountgenre" resultType="java.lang.Integer">
+		select count(*)
+		from sbs_book
+		<if test="choice=='title'">
+			WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+		</if>
+		<if test="choice=='writer'">
+			WHERE WRITER LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+		</if>
+		<if test="choice=='content'">
+			WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+		</if>
 	</select>
 
 </mapper>

@@ -62,4 +62,16 @@ public class BookService {
 	public List<BookDto> booklistsort(Bookparam param){
 		return dao.booklistsort(param);
 	}
+	
+	public List<BookDto> booklistgenre(Bookparam param){
+		return dao.booklistgenre(param);
+	}
+	
+	public int booksortcount(Bookparam param) {
+		return dao.bookcountsort(param);
+	}
+	
+	public int bookgenrecount(Bookparam param) {
+		return dao.bookcountgenre(param);
+	}
 }
