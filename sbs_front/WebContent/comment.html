@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Insert title here</title>
+<link rel="stylesheet" href="cssKwak/comment.css">
 </head>
 <body>
 <div class="container1">
@@ -13,11 +14,14 @@
 	</div>
 	<div class="write-comment">
 	<form id="frm">
-	<span id=name></span>
+	<div id=name></div>
 	<input type="hidden" id="nickname" name="nickname">
+	<div id="content-frame">
 	<textarea name="content"></textarea>
+	<button type="button" id="postcomment">작성</button>	
+	</div>
 	<input type=hidden id=feedSeq name=feedSeq>
-	<button type="button" id="postcomment">작성</button>
+	
 	</form>
 	</div>
 <!--보내야할 정보 1.nickname, content, feed_seq, reg_date  -->	
@@ -80,17 +84,17 @@ $.ajax({
 	url:"http://localhost:3000/comment?feedSeq="+parsing[1],
 	type:"get",
 	success: function(list){
-		alert(JSON.stringify(list));
+		//alert(JSON.stringify(list));
 		var html = [];
 		$.each(list, function(index, item){
 			let nickname = String(ses.nickname);
 			let likecount = getLike(item.seq);
-			html.push("<div>")
-			html.push("작성자:"+item.nickname+"<br>");
-			html.push("내용:"+item.content+"<br>");
-			html.push("작성시간:"+item.regDate+"<br>");
-			html.push("좋아요:" +likecount+"&nbsp;");
-			html.push("<button onclick='likebtn(`"+nickname+"`,`"+item.seq+ "`)'>좋아요</button><br>");
+			html.push("<div class='comment-box'>")
+			html.push("<span id='nickname'>"+item.nickname+"</span>"+"&nbsp;&nbsp;&nbsp;"+"<span id=regdate>"+item.regDate+"</span>");
+			html.push("<div id='content'>"+item.content+"</div>");
+			
+			html.push("<button id='btn1' onclick='likebtn(`"+nickname+"`,`"+item.seq+ "`)'><img id='img1' src='images/thumbsUp2.png'></button>");
+			html.push(likecount);
 			html.push("</div>")
 		})
 		$('.comments').append(html.join(''));

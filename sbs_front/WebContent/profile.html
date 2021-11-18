@@ -15,33 +15,26 @@
 	<div class="left">left</div>
 	<div class="picture">
 		<div class="profile-image">
-			<img src="images/Ff8-zell.jpg" class="img-thumbnail1">			
+			<img src="images/Ff8-zell.jpg" class="img-thumbnail1">		
 		</div>	
 	
 	<div id="profile-nickname"></div>
 	<div id="profile-birth">00/00</div>
 	<div id="profile-email">abc123@naver.com</div>
-	</div>
-	
-	<div class="button-area">
-		<div class="button">
-		<button id=btn1 type="button">팔로잉</button>
-		<button id=btn2 type="button">메세지</button>
-		</div>
+	<div class="button"><button id=btn2 type="button">메세지</button></div>
 	</div>
 	
 	<div class="info">
 		<p style="font-weight:bold; font-size:25px;">Intro&nbsp;<button id=btn3 type="button">ㅇ</button></p>
 		<div id="intro">
-		독서를 좋아합니다. 독서에 관해 궁금하시거나 나누고 싶은 이야기가 있다면 언제든 환영입니다.
 		</div>
-		<p style="font-weight:bold; font-size:25px; margin-top:30px;">Favorite Books&nbsp;<button id=btn4 type="button">ㅇ</button></p>
+		<p style="font-weight:bold; font-size:25px;">Favorite Books&nbsp;<button id=btn4 type="button">ㅇ</button></p>
 		<div id="FavBooks">
 		'어린왕자' '연금술사' '이것이 오라클이다'
 		</div>	
 	</div>
 	<div class="content">content<br>
-		 <ul class="infinite-list">최신 feed</ul>
+		 <ul class="infinite-list"><h3 style="margin-bottom:10px">작성자 게시물 확인하기</h3></ul>
 		
 	</div>
 	
@@ -115,9 +108,10 @@ function getNextFeed(){
 				let nickname = String(ses.nickname);
 				let likecount = getLike(item.seq);
 				
-				html.push("<div>");
-				html.push("등록일자 : "+ item.regDate+"<br>");
-				html.push("<a href='profile.html?"+item.nickname + "'>닉네임 :" + item.nickname+ "</a><br>");
+				html.push("<div class='feed-frame'>");				
+				html.push("<a id='nick' href='profile.html?"+item.nickname + "'>" + item.nickname+ "</a>&nbsp;&nbsp;");
+				html.push("<span id='regi'>"+ item.regDate+"</span><br>");
+				html.push("<div id=feed-img-frame><img id=feed-img src='images/"+item.filename+"' onerror='this.src=`images/error.png`;'/></div><br>");
 				html.push("내용 : " + item.content+"<br>");
 				html.push("좋아요 : " +likecount+"&nbsp;");
 				html.push("<button onclick='likebtn(`"+nickname+"`,`"+item.seq+ "`)'>좋아요</button><br>");
@@ -128,7 +122,7 @@ function getNextFeed(){
 			
 			$('.infinite-list').append(html.join(''));
 			currentPage++;
-//			alert(JSON.stringify(list));
+			alert(JSON.stringify(list));
 // 			document.getElementById('json').innerHTML=JSON.stringify(list);
 			
 		},

@@ -1,0 +1,10 @@
+select * from sbs_like;
+
+
+select count(*)
+		from sbs_like
+		where  feed_seq='41';
+		
+select count(*)
+		from sbs_like
+		where nickname='test1' and comment_seq=0;
