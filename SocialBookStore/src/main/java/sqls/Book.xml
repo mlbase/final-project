@@ -31,7 +31,7 @@
 	</select>
 	<select id="booklistgenre" resultType="mul.com.a.dto.BookDto">
 		select TB.*
-		from ( select rank() over(order by reg_date desc)  as RNUM,
+		from ( select rank() over(partition by genre order by reg_date desc)  as RNUM,
 				COUNT(*) OVER() AS TOTCNT,
 				SEQ,
 				TITLE,
@@ -55,15 +55,15 @@
 				</if>
 				<if test="choice=='content'">
 				WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
-				</if>
-				AND RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1
-		 		<![CDATA[  
+				</if>	
+		 		<![CDATA[
+		 		AND RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1  
 		  		AND RNUM <= #{currentpage}*#{rowsperpage}
 		  		]]>
 	</select>
 	<select id="booklistsort" resultType="mul.com.a.dto.BookDto">
 		select TB.*
-		from ( select rank() over(order by reg_date desc)  as RNUM,
+		from ( select rank() over(partition by sort order by reg_date desc)  as RNUM,
 				COUNT(*) OVER() AS TOTCNT,
 				SEQ,
 				TITLE,
@@ -88,8 +88,8 @@
 				<if test="choice=='content'">
 				WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
 				</if>
-				AND RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1
-		 		<![CDATA[  
+		 		<![CDATA[
+		 		AND RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1  
 		  		AND RNUM <= #{currentpage}*#{rowsperpage}
 		  		]]>
 		 
