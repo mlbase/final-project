@@ -109,6 +109,13 @@ public class BookController {
 		return list;
 	}
 	
+	@GetMapping(value="/booklistgenre")
+	public List<BookDto> booklistgenre(Bookparam param){
+		List<BookDto> list = service.booklistgenre(param);
+		
+		return list;
+	}
+	
 	@GetMapping(value="/orderlist")
 	public List<OrderDto> orderlist(String id) {
 		List<OrderDto> list = service.orderlist();
@@ -123,6 +130,18 @@ public class BookController {
 		return list;
 	}
 	
+	@GetMapping(value="/genrecount")
+	public int genrecount(Bookparam param) {
+		int a = service.bookgenrecount(param);
+		
+		return a;
+	}
 	
+	@GetMapping(value="/sortcount")
+	public int sortcount(Bookparam param) {
+		int a = service.booksortcount(param);
+		
+		return a;
+	}
 	
 }
