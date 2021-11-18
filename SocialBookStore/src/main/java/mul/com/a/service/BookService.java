@@ -64,6 +64,7 @@ public class BookService {
 	}
 	
 	public List<BookDto> booklistgenre(Bookparam param){
+		/* System.out.println(param.toString()); */
 		return dao.booklistgenre(param);
 	}
 	
@@ -72,6 +73,7 @@ public class BookService {
 	}
 	
 	public int bookgenrecount(Bookparam param) {
+		
 		return dao.bookcountgenre(param);
 	}
 }

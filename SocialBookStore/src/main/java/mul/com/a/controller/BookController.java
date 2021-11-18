@@ -112,7 +112,9 @@ public class BookController {
 	@GetMapping(value="/booklistgenre")
 	public List<BookDto> booklistgenre(Bookparam param){
 		List<BookDto> list = service.booklistgenre(param);
-		
+		/*
+		 for (BookDto dto : list) { System.out.println(dto.toString()); }
+		 */
 		return list;
 	}
 	
