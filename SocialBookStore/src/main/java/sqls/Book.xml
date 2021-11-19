@@ -113,8 +113,7 @@
 	</select>
 	
 	<select id="getbook" parameterType="java.lang.String" resultType="mul.com.a.dto.BookDto">
-		select seq, title, filename, writer, publisher, price, isbn, sort, genre, delivery_fee, 
-		amount, publish_date
+		select *
 		from sbs_book
 		where seq=${seq}
 	</select>
