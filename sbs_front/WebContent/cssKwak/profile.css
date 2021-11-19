@@ -1,7 +1,7 @@
 .container1{
 	display: grid;
-	grid-template-columns: 10vw 30vw 50vw 10vw;
-	grid-template-rows:  60vh 40vh;
+	grid-template-columns: 20vw 20vw 40vw 20vw;
+	grid-template-rows:  50vh 40vh;
 	height: 100vh;
 	grid-template-areas:
 						'left picture content right'
@@ -11,6 +11,7 @@
 }
 .container1 div {
 	background-color: white;
+	/* border: ridge black; */
 	border: none;
 }
 a{
@@ -35,6 +36,24 @@ a:visited{
 .info{
 	grid-area:info;
 }
+.title2{
+	font-weight:bold;
+	font-size:25px;
+}
+#updateIntro{
+	background-color:white;
+	border:none;
+	cursor:pointer;
+}
+#updateInterest{
+	background-color:white;
+	border:none;
+	cursor:pointer;
+}
+#update1{
+	width:15px;
+	height:15px;
+}
 .content{
 	grid-area:content;
 }
@@ -57,9 +76,34 @@ a:visited{
 	width:100%;
 	height:100%;
 }
+#img1{
+	width:15px;
+	height:15px;
+}
+#btn1{
+	background-color:white;
+	border:none;
+	cursor:pointer;
+}
+#commenticon{
+	width:20px;
+	height:20px;
+}
+#commentPopBtn{
+	background-color:white;
+	border:none;
+	cursor:pointer;
+}
+#feedcontent{
+	margin-top:20px;
+}
+#likecount1{
+	font-size:20px;
+	font-weight:bold;
+}
 .infinite-list{
   /* We need to limit the height and show a scrollbar */
-  width: 600px;
+  width: 650px;
   height: 800px;
   overflow: auto;
 
@@ -69,7 +113,21 @@ a:visited{
   padding: 20px;
   border: 5px groove;
 }
-
+#title1{
+	font-size:25px;
+	font-weight:bold;
+	vertical-align:middle;
+}
+#feedWriteBtn{
+	background-color:white;
+	border:none;
+	cursor:pointer;
+	vertical-align:middle;
+}
+#FeedWriteIcon{
+	width:30px;
+	height:30px;
+}
 .right{
 	grid-area:right;
 }
@@ -111,22 +169,19 @@ a:visited{
 	font-size:18px;
 	text-align:center;
 }
-.button{
+.button-frame{
 	text-align:center;
-	margin-top:5px;
+	margin-top:10px;
 	
 }
-#btn1{
-	
+#messagePopBtn{
+	background-color:white;
+	border:none;
+	cursor:pointer;
 }
-#btn2{
-	
-}
-#btn3{
-	
-}
-#btn4{
-	
+#chatIcon{
+	width:28px;
+	height:21px;
 }
 #intro{
 	margin-top: 0px;
@@ -134,8 +189,8 @@ a:visited{
 	font-size:18px;
 	text-align:left;	
 }
-#FavBooks{
-	margin-top: 3px;
+#interestTags{
+	margin-top: 0px;
 	color: black;	
 	font-size:18px;
 	text-align:left;	

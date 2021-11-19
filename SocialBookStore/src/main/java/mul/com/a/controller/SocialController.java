@@ -29,7 +29,6 @@ public class SocialController {
 	
 	@PostMapping(value="/like")
 	public String like(LikeDto dto) {
-		System.out.println(dto.toString());
 		String msg = "";
 		
 		boolean b = false;
@@ -64,6 +63,13 @@ public class SocialController {
 		if(b) {
 			msg="OK";
 		}
+		
+		return msg;
+	}
+	
+	@PostMapping(value="/following")
+	public String following(String nickname1, String nickname2) {
+		String msg ="";
 		
 		return msg;
 	}

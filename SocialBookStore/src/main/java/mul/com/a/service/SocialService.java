@@ -38,12 +38,10 @@ public class SocialService {
 	}
 	
 	public boolean feedlikeinspect(LikeDto dto) {
-		
 		return dao.feedlikeinspect(dto)>0?true:false;
 	}
 	
 	public boolean commentlikeinspect(LikeDto dto) {
-		
 		return dao.commentlikeinspect(dto)>0?true:false;
 	}
 }

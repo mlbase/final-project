@@ -68,7 +68,7 @@ $("#login").click(function(){
 			
 				// session에 저장 setAttribute( , ) getAttribute()
 				sessionStorage.setItem("login", JSON.stringify(resp)); // <- server에 저장하는 것은 아니다
-				location.href="base.html?"+resp.id;
+				location.href="base.html?main/bookwrite.html";
 						
 			}
 		

@@ -8,10 +8,16 @@ public class WishDto {
 	private int deliveryFee;
 	private int bookCount;
 	private int price;
+	private String filename;
+	private String writer;
+	private String title;
 	
 	public WishDto() {}
 
-	public WishDto(int seq, String id, int bookSeq, int deliveryFee, int bookCount, int price) {
+	
+
+	public WishDto(int seq, String id, int bookSeq, int deliveryFee, int bookCount, int price, String filename,
+			String writer, String title) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -19,7 +25,12 @@ public class WishDto {
 		this.deliveryFee = deliveryFee;
 		this.bookCount = bookCount;
 		this.price = price;
+		this.filename = filename;
+		this.writer = writer;
+		this.title = title;
 	}
+
+
 
 	public int getSeq() {
 		return seq;
@@ -69,11 +80,52 @@ public class WishDto {
 		this.price = price;
 	}
 
+
+
+	public String getFilename() {
+		return filename;
+	}
+
+
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+
+
+	public String getWriter() {
+		return writer;
+	}
+
+
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "WishDto [seq=" + seq + ", id=" + id + ", bookSeq=" + bookSeq + ", deliveryFee=" + deliveryFee
-				+ ", bookCount=" + bookCount + ", price=" + price + "]";
+				+ ", bookCount=" + bookCount + ", price=" + price + ", filename=" + filename + ", writer=" + writer
+				+ ", title=" + title + "]";
 	}
+
+	
 	
 	
 }

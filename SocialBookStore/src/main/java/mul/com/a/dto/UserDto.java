@@ -14,21 +14,18 @@ public class UserDto {
 	private String address;
 	private String regDate;
 	private int auth;
-	private String introduce;
 	private String filename;
+	private String introduce;
 	
 	public UserDto() {}
 
 	
 	
-	
-	
-
 
 
 
 	public UserDto(int seq, String id, String pwd, String email, String following, String follower, String nickname,
-			String birth, String name, String address, String regDate, int auth, String introduce, String filename) {
+			String birth, String name, String address, String regDate, int auth, String filename, String introduce) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -42,8 +39,8 @@ public class UserDto {
 		this.address = address;
 		this.regDate = regDate;
 		this.auth = auth;
-		this.introduce = introduce;
 		this.filename = filename;
+		this.introduce = introduce;
 	}
 
 
@@ -158,27 +155,6 @@ public class UserDto {
 	public void setAuth(int auth) {
 		this.auth = auth;
 	}
-	
-	
-
-	public String getIntroduce() {
-		return introduce;
-	}
-
-
-
-
-
-
-
-
-
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
-
-
-
 
 
 
@@ -194,15 +170,27 @@ public class UserDto {
 
 
 
-
-
-
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
 
 
 
+
+
+
+	public String getIntroduce() {
+		return introduce;
+	}
+
+
+
+
+
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
 
 
 
@@ -213,16 +201,11 @@ public class UserDto {
 	public String toString() {
 		return "UserDto [seq=" + seq + ", id=" + id + ", pwd=" + pwd + ", email=" + email + ", following=" + following
 				+ ", follower=" + follower + ", nickname=" + nickname + ", birth=" + birth + ", name=" + name
-				+ ", address=" + address + ", regDate=" + regDate + ", auth=" + auth + ", introduce=" + introduce
-				+ ", filename=" + filename + "]";
+				+ ", address=" + address + ", regDate=" + regDate + ", auth=" + auth + ", filename=" + filename
+				+ ", introduce=" + introduce + "]";
 	}
 
-
-
 	
-
-
-
 	
 	
 }

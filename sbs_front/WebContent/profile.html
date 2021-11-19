@@ -21,20 +21,31 @@
 	<div id="profile-nickname"></div>
 	<div id="profile-birth">00/00</div>
 	<div id="profile-email">abc123@naver.com</div>
-	<div class="button"><button id=btn2 type="button">메세지</button></div>
+	<div class="button-frame">
+	<button id="messagePopBtn" type="button"><img id='chatIcon' src='images/chatIcon.png'></button>
+	</div>
 	</div>
 	
 	<div class="info">
-		<p style="font-weight:bold; font-size:25px;">Intro&nbsp;<button id=btn3 type="button">ㅇ</button></p>
+		<div class="title2">
+		Intro&nbsp;
+		<button id="updateIntro" type="button"><img id='update1' src='images/update.png'></button>
+		</div>
 		<div id="intro">
 		</div>
-		<p style="font-weight:bold; font-size:25px;">Favorite Books&nbsp;<button id=btn4 type="button">ㅇ</button></p>
-		<div id="FavBooks">
+		<div class="title2">
+		Interest Tags&nbsp;
+		<button id="updateInterest" type="button"><img id='update1' src='images/update.png'></button>
+		</div>
+		<div id="interestTags">
 		'어린왕자' '연금술사' '이것이 오라클이다'
 		</div>	
 	</div>
 	<div class="content">content<br>
-		 <ul class="infinite-list"><h3 style="margin-bottom:10px">작성자 게시물 확인하기</h3></ul>
+		 <ul class="infinite-list">
+		 <span id="title1">작성자 게시물 확인하기</span>
+		 <button id="feedWriteBtn" onclick="feed_write_pop()" type="button"><img id='FeedWriteIcon' src='images/FeedWriteIcon.png'></button>
+		 </ul>
 		
 	</div>
 	
@@ -43,7 +54,7 @@
 	<div class="right">right</div>
 </div>
 <script type="text/javascript">
-let parsing = location.href.split("?");
+/* let parsing1 = location.href.split("?"); */
 let ses = JSON.parse(sessionStorage.getItem("login"));
 $("#profile-nickname").html(ses.nickname);
 $("#profile-birth").html(ses.birth);
@@ -92,7 +103,7 @@ function getNextFeed(){
 		return;
 	}
 	var params = {"currentPage" : currentPage,
-				  "nickname" 		  : parsing[1],
+				  "nickname" 		  : ses.nickname,
 				  "rowsPerPage" : rowsPerPage
 				 };
 	
@@ -102,7 +113,7 @@ function getNextFeed(){
 		type: "get",
 		success: function(list){
 			
-			totalCnt = list[0].totcnt;
+			let totalCnt = list[0].totcnt;
 			var html = [];
 			$.each(list, function(index, item){ 
 				let nickname = String(ses.nickname);
@@ -111,18 +122,18 @@ function getNextFeed(){
 				html.push("<div class='feed-frame'>");				
 				html.push("<a id='nick' href='profile.html?"+item.nickname + "'>" + item.nickname+ "</a>&nbsp;&nbsp;");
 				html.push("<span id='regi'>"+ item.regDate+"</span><br>");
-				html.push("<div id=feed-img-frame><img id=feed-img src='images/"+item.filename+"' onerror='this.src=`images/error.png`;'/></div><br>");
-				html.push("내용 : " + item.content+"<br>");
-				html.push("좋아요 : " +likecount+"&nbsp;");
-				html.push("<button onclick='likebtn(`"+nickname+"`,`"+item.seq+ "`)'>좋아요</button><br>");
-				html.push("태그 : " + item.tag);
-				html.push("<input  onclick='comment_pop("+String(item.seq) + ")' type=button value='댓글보기'>")
+				html.push("<div id=feed-img-frame><img id=feed-img src='images/"+item.filename+"' onerror='this.src=`images/error.png`;'/></div>");
+				html.push("<button id='btn1' onclick='likebtn(`"+nickname+"`,`"+item.seq+ "`)'><img id='img1' src='images/heart.png'></button>");
+				html.push("<span id=likecount1>"+likecount+"</span>&nbsp;&nbsp;&nbsp;");
+				html.push("<button id='commentPopBtn' onclick='comment_pop("+String(item.seq) + ")'><img id='commenticon' src='images/commentIcon.png'></button><br>")
+				html.push("<div id='feedcontent'>" + item.content+"</div><br>");	
+				html.push("태그 : " + item.tag+"<br>");
 				html.push("</div>");
 			});
 			
 			$('.infinite-list').append(html.join(''));
 			currentPage++;
-			alert(JSON.stringify(list));
+//			alert(JSON.stringify(list));
 // 			document.getElementById('json').innerHTML=JSON.stringify(list);
 			
 		},
@@ -136,6 +147,12 @@ function getNextFeed(){
 function comment_pop(seq) {
 	window.open("comment.html?"+seq , '댓글보기', 'top=10, left=10, width=500, height=600, status=no, menubar=no')
 };
+
+function feed_write_pop() {
+	const popUrl = "Kwak/feedWrite.html";
+	const popOption = "top=100, left=100, width=700px, height=800px, status=no, menubar=no";
+	window.open(popUrl,'피드작성하기',popOption);
+}
 
 function likebtn(nickname, feedSeq) {
 	$.ajax({

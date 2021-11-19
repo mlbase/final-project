@@ -112,7 +112,7 @@ ALTER TABLE sbs_like add foreign key(feed_seq) references sbs_feed(seq);
 ---------------------------------------------------------------------------
 
 
-
+select * from sbs_feed;
 
 alter table sbs_user
 add column(ROLE VARCHAR(50) NOT NULL)

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mul.com.a.dto.BookDto;
+import mul.com.a.dto.Bookparam;
 import mul.com.a.dto.OrderDto;
 import mul.com.a.dto.WishDto;
 import mul.com.a.service.BookService;
@@ -49,8 +50,8 @@ public class BookController {
 	}
 	
 	@GetMapping(value="/book")
-	public BookDto getbook(String title) {
-		BookDto dto = service.getbook(title);
+	public BookDto getbook(int seq) {
+		BookDto dto = service.getbook(seq);
 		
 		if(dto==null) {
 			System.out.println("db에 없음");
@@ -99,6 +100,24 @@ public class BookController {
 		return list;
 	}
 	
+	@GetMapping(value="/booklistsort")
+	public List<BookDto> booklistsort(Bookparam param) {
+		List<BookDto> list = service.booklistsort(param);
+		/*for (BookDto dto : list) {
+			System.out.println(dto.toString());
+		}*/
+		return list;
+	}
+	
+	@GetMapping(value="/booklistgenre")
+	public List<BookDto> booklistgenre(Bookparam param){
+		List<BookDto> list = service.booklistgenre(param);
+		/*
+		 for (BookDto dto : list) { System.out.println(dto.toString()); }
+		 */
+		return list;
+	}
+	
 	@GetMapping(value="/orderlist")
 	public List<OrderDto> orderlist(String id) {
 		List<OrderDto> list = service.orderlist();
@@ -113,6 +132,18 @@ public class BookController {
 		return list;
 	}
 	
+	@GetMapping(value="/genrecount")
+	public int genrecount(Bookparam param) {
+		int a = service.bookgenrecount(param);
+		
+		return a;
+	}
 	
+	@GetMapping(value="/sortcount")
+	public int sortcount(Bookparam param) {
+		int a = service.booksortcount(param);
+		
+		return a;
+	}
 	
 }
