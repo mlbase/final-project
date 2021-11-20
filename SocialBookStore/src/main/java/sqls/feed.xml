@@ -47,4 +47,38 @@
 		  AND RNUM <= #{currentPage}*#{rowsperPage}
 		  ]]>
 	</select>
+	
+	<select id="newsfeed" parameterType="hashMap" resultType="mul.com.a.dto.FeedDto">
+		SELECT TA.*
+		  FROM (SELECT RANK() OVER(ORDER BY FD.REG_DATE DESC) AS RNUM
+		             , COUNT(1) OVER() AS TOTCNT
+		             , SEQ
+		             , NICKNAME
+		             , CONTENT
+		             , FILENAME
+		             , TAG
+		             , REG_DATE
+		      FROM SBS_FEED FD
+		)TA
+		WHERE RNUM >= (#{currentPage}*#{rowsperPage})-#{rowsperPage}+1
+		 <![CDATA[  
+		  AND RNUM <= #{currentPage}*#{rowsperPage}
+		  ]]>
+	</select>
+	<select id="bestfeed" parameterType="hashMap" resultType="mul.com.a.dto.FeedDto">
+		select ta.*
+  		from (select 
+               fd.*
+               ,ROW_NUMBER() OVER(ORDER BY fl.like_cnt desc, fd.reg_date desc) as rnum
+          from hr.sbs_feed fd     
+          left outer join 
+          (select count(1) as like_cnt, feed_seq
+                 from hr.sbs_like
+                group by feed_seq) fl
+          on fd.seq = fl.feed_seq)ta
+		WHERE RNUM >= (#{currentPage}*#{rowsperPage})-#{rowsperPage}+1
+		 <![CDATA[  
+		  AND RNUM <= #{currentPage}*#{rowsperPage}
+		  ]]>
+	</select>
 </mapper>
