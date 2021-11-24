@@ -1,64 +1,4 @@
-<!DOCTYPE html>
-<html>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-<head>
-<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>Profile</title>
-<link rel="stylesheet" href="cssKwak/profile.css">
-</head>
-<body>
-<div class="container1">
-	<div class="left">left</div>
-	<div class="picture">
-		<div class="profile-image">
-			<img src="images/Ff8-zell.jpg" class="img-thumbnail1">		
-		</div>	
-	
-	<div id="profile-nickname"></div>
-	<div id="profile-birth">00/00</div>
-	<div id="profile-email">abc123@naver.com</div>
-	<div class="button-frame">
-	<button id="messagePopBtn" type="button"><img id='chatIcon' src='images/chatIcon.png'></button>
-	</div>
-	</div>
-	
-	<div class="info">
-		<div class="title2">
-		Intro&nbsp;
-			<button id="updateIntro" type="button" onclick="update('modify',this)">
-				<img id='update1' src='images/update.png'>
-			</button>
-		</div>
-		<div id="intro">
-		<textarea id="intro1" name="intro1" readonly></textarea>
-		</div>
-		<div class="title2">
-		Interest Tags&nbsp;
-		<button id="updateInterest" type="button"><img id='update1' src='images/update.png'></button>
-		</div>
-		<div id="interestTags">
-		'어린왕자' '연금술사' '이것이 오라클이다'
-		</div>	
-	</div>
-	<div class="content">content<br>
-		 <ul class="infinite-list">
-		 <span id="title1">작성자 게시물 확인하기</span>
-		 <button id="feedWriteBtn" onclick="feed_write_pop()" type="button"><img id='FeedWriteIcon' src='images/FeedWriteIcon.png'></button>
-		 </ul>
-		
-	</div>
-	
-	
-	
-	<div class="right">right</div>
-</div>
-<script type="text/javascript">
-/* let parsing1 = location.href.split("?"); */
-/* let ses = JSON.parse(sessionStorage.getItem("login"));
+let ses = JSON.parse(sessionStorage.getItem("login"));
 $("#profile-nickname").html(ses.nickname);
 $("#profile-birth").html(ses.birth);
 $("#profile-email").html(ses.email);
@@ -144,7 +84,7 @@ function getNextFeed(){
 			alert('error');
 		}
 	});
-} */
+}
 
 
 
@@ -152,7 +92,53 @@ function getNextFeed(){
 
 	
 
-</script>
-</body>
-<script type="text/javascript" src="jsKwak/profile.js"></script>
-</html>
+
+function update(action,obj){
+	if(action == 'modify'){
+		//readonly 풀고
+		//onclick="update('update');
+		//
+		jQuery(obj).attr('readonly',false);
+		jQuery(obj).attr('onclick',"update('update',this)");
+	}else if(action == 'update'){
+		//ajax 저장
+		
+		jQuery(obj).attr('readonly',true);
+	}
+}
+
+/*function updateIntro{
+	$.ajax
+}*/
+
+function comment_pop(seq) {
+	window.open("comment.html?"+seq , '댓글보기', 'top=10, left=10, width=500, height=600, status=no, menubar=no')
+};
+
+function feed_write_pop() {
+	const popUrl = "Kwak/feedWrite.html";
+	const popOption = "top=100, left=100, width=700px, height=800px, status=no, menubar=no";
+	window.open(popUrl,'피드작성하기',popOption);
+}
+
+function likebtn(nickname, feedSeq) {
+	$.ajax({
+		url:"http://localhost:3000/like",
+		type:"post",
+		data : {"nickname":nickname, "feedSeq":feedSeq, "isLike": 1},
+		success: function(resp){
+			//alert(resp);
+			if(resp == 'OK'){
+				alert("좋아요를 누르셨습니다.");
+			}
+			if(resp == 'already'){
+				alert("이미 좋아요를 누르셨습니다.");
+			}
+			
+		},
+		error: function(){
+			alert(error);
+		}
+
+	})
+};

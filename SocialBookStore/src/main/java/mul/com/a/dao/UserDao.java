@@ -18,4 +18,6 @@ public interface UserDao {
 	String getpwd(String id);
 	
 	int idcheck(String id);
+	
+	/* int updateIntro(String id, String intro); */
 }

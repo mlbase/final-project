@@ -41,4 +41,11 @@ public class FeedService {
 	public List<CommentDto> commentlist(int feedSeq){
 		return dao.commentlist(feedSeq);
 	}
+	public List<FeedDto> newsfeed(Map<String, Object> map){
+		return dao.newsfeed(map);
+	}
+
+	public List<FeedDto> bestfeed(Map<String, Object> map){
+		return dao.bestfeed(map);
+	}
 }

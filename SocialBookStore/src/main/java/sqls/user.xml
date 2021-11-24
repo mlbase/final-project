@@ -31,4 +31,9 @@
 		where id=#{id}
 	</select>
 
+<!-- 	<select id="updateIntro" parameterType="java.lang.String">
+		update sbs_user
+		set introduce="#{intro}"
+		where id=#{id}
+		</select> -->
 </mapper>

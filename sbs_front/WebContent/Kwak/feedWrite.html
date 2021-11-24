@@ -13,6 +13,7 @@
 		<table id=tableFrame>
 			<tr>
 				<td id="td1">nickname</td>
+				<input type="hidden" id="nickname" name="nickname" value="">
 			</tr>
 			<tr id="tr2">
 				<td><input type="file" id="image" accept="image/*" onchange="javascript:setThumbnail(event);insertFilename();"></td>
@@ -37,6 +38,7 @@
 <script type="text/javascript">
 let ses = JSON.parse(sessionStorage.getItem("login"));
 $("#td1").html(ses.nickname);
+$("#nickname").val(ses.nickname);
 //let getFilename = document.getElementById('image').files[0].name;
 //document.getElementById('image').files[0].name;
 //$("#image").files[0].name;

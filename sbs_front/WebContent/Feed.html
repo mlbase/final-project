@@ -9,67 +9,23 @@
 <body>
 <div class="container1">
 	
-	<div class="left">left</div>
+	<div class="left"></div>
 	
 	<div class="content">
-		content
 		
-		<ul class="infinite-list">infinite list</ul>
 		
-		<p id="nickname"></p>
-		<p id="content"></p>
-		<p id="tag"></p>
-		
+		<ul class="infinite-list">
+		<span id="title1">최신 피드</span>
+		<button id="feedWriteBtn" onclick="feed_write_pop()" type="button"><img id='FeedWriteIcon' src='images/FeedWriteIcon.png'></button>
+		</ul>
 		
 	</div>		
 	
-	<div class="right">right</div>
+	<div class="right"></div>
 	
 </div>
-<script type="text/javascript">
-const listElm = document.querySelector('.infinite-list');
-let itemNum = 1;
-
-const loadMoreList = () => {
-  for (let i = 0; i < 10; i++) {
-    const item = document.createElement('li');
-    item.innerText = 'Item ' + itemNum++;
-    listElm.appendChild(item);
-  }
-}
-
-listElm.addEventListener('scroll', () => {
-  if(listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
-    loadMoreList();
-  }
-});
-
-// Initially load items
-loadMoreList();
-
-$(document).ready(function(){
-	
-		$.ajax({
-			url:"http://localhost:3000/feedlist",
-			type: "get",
-			success: function(list){
-				
-				alert(JSON.stringify(list));
-				document.getElementById('nickname').innerHTML=JSON.stringify(list,['nickname']);
-				document.getElementById('content').innerHTML=JSON.stringify(list,['content']);
-				document.getElementById('tag').innerHTML=JSON.stringify(list,['tag']);
-			},
-			error:function(){
-				alert('error');
-			}
-		});
-	
-});
 
 
-
-
-
-</script>
+<script type="text/javascript" src="jsKwak/Feed.js"></script>
 </body>
 </html>

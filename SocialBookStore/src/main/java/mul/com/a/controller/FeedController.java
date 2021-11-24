@@ -90,4 +90,37 @@ public class FeedController {
 		
 		return list;
 	}
+	@GetMapping(value="/bestfeed")
+	public List<FeedDto> bestfeed(
+			@RequestParam(value="currentPage", defaultValue = "1") int currentPage,
+			@RequestParam(value="rowsperPage", defaultValue = "10") int rowsperPage
+			) {
+//			list = service.myfeed(id);
+
+
+
+			Map<String,Object> map = new HashMap();
+			map.put("currentPage", currentPage);
+			map.put("rowsperPage", rowsperPage);
+			List<FeedDto> list = null;
+			list = service.bestfeed(map);
+
+			return list;
+	}
+
+	@GetMapping(value="/newsfeed")
+	public List<FeedDto> newsfeed(
+			@RequestParam(value="currentPage", defaultValue = "1") int currentPage,
+			@RequestParam(value="rowsperPage", defaultValue = "10") int rowsperPage
+			) {
+
+
+		Map<String,Object> map = new HashMap();
+		map.put("currentPage", currentPage);
+		map.put("rowsperPage", rowsperPage);
+		List<FeedDto> list = null;
+		list = service.newsfeed(map);
+
+		return list;
+	}
 }

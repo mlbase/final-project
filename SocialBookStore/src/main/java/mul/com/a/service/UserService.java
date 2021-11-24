@@ -42,4 +42,9 @@ public class UserService {
 
 		return dao.idcheck(id)>0?true:false;
 	}
+	
+	/*
+	 * public boolean updateIntro(String id, String new_intro) { return
+	 * dao.updateIntro(id, new_intro)>0?true:false; }
+	 */
 }

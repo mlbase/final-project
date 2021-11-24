@@ -53,7 +53,7 @@ function account() {
 $("#login").click(function(){
 	$.ajax({
 		url:"http://localhost:3000/login",
-		type:"get",
+		type:"post",
 		data:{ 'id':$("#id").val(), 'pwd':$("#pwd").val() },
 		dataType:'JSON',
 		success:function(resp){

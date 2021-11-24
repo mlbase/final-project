@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .container1{
 	display: grid;
 	grid-template-columns: 20vw 20vw 40vw 20vw;
@@ -22,9 +23,6 @@ a:link{
 }
 a:visited{
 	color:black; text-decoration:none;
-}
-.header{
-	grid-area:header;
 }
 .left{
 	grid-area:left;
@@ -188,6 +186,11 @@ a:visited{
 	color: black;	
 	font-size:18px;
 	text-align:left;	
+}
+#intro1{
+	width:350px;
+	border:none;
+	resize:none;
 }
 #interestTags{
 	margin-top: 0px;

@@ -93,8 +93,8 @@ $.ajax({
 			html.push("<span id='nickname'>"+item.nickname+"</span>"+"&nbsp;&nbsp;&nbsp;"+"<span id=regdate>"+item.regDate+"</span>");
 			html.push("<div id='content'>"+item.content+"</div>");
 			
-			html.push("<button id='btn1' onclick='likebtn(`"+nickname+"`,`"+item.seq+ "`)'><img id='img1' src='images/thumbsUp2.png'></button>");
-			html.push(likecount);
+			html.push("<button id='btn1' item-seq="+"'"+item.seq+"'"+""+"onclick='likebtn(`"+nickname+"`,`"+item.seq+ "`)'><img id='img1' src='images/thumbsUp2.png'></button>");
+			html.push("<span id=\"like_cnt\">"+likecount+"<span>");
 			html.push("</div>")
 		})
 		$('.comments').append(html.join(''));
@@ -105,6 +105,14 @@ $.ajax({
 });
 
 function likebtn(nickname, commentSeq) {
+	
+	var obj = null;
+	$.each(jQuery('.comment-box > button'), function(index, item){
+		if(jQuery(item).attr('item-seq') == commentSeq){
+			obj = item;
+		} 
+	});
+	obj = jQuery(obj).siblings('span#like_cnt');
 	$.ajax({
 		url:"http://localhost:3000/like",
 		type:"post",
@@ -112,6 +120,8 @@ function likebtn(nickname, commentSeq) {
 		success: function(resp){
 			alert(resp);
 			if(resp == 'OK'){
+				var cnt = Number(obj.text())+1;
+				jQuery(obj).text(cnt);
 				alert("좋아요를 누르셨습니다.");
 			}
 			if(resp == 'already'){

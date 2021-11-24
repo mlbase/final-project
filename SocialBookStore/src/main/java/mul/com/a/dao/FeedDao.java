@@ -24,4 +24,8 @@ public interface FeedDao {
 	int postcomment(CommentDto dto);
 	
 	List<CommentDto> commentlist(int feedSeq);
+	
+	List<FeedDto> newsfeed(Map<String, Object> map);
+
+	List<FeedDto> bestfeed(Map<String, Object> map);
 }

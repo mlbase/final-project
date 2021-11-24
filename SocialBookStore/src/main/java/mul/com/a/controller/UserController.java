@@ -20,7 +20,7 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder encoder;
 	
-	@GetMapping(value="/login")
+	@PostMapping(value="/login")
 	public UserDto login(String id, String pwd){
 		
 		String encodedpwd = service.getpw(id);
@@ -92,6 +92,17 @@ public class UserController {
 		
 		return msg; 
 	}
+	
+	/*
+	 * @GetMapping("/updateIntro") public String updateIntro(String id, String
+	 * introduce, String new_intro) { String msg = "NO";
+	 * 
+	 * boolean b = false;
+	 * 
+	 * b = service.updateIntro(id, new_intro);
+	 * 
+	 * if(b) { msg = "YES"; } return msg; }
+	 */
 	
 	
 }
