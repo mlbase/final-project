@@ -82,4 +82,9 @@ public class SocialController {
 		
 		return list;
 	}
+	
+	@GetMapping(value="/commentcount")
+	public int commentcount(int seq) {
+		return service.commentCount(seq);
+	}
 }

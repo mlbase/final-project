@@ -44,4 +44,8 @@ public class SocialService {
 	public boolean commentlikeinspect(LikeDto dto) {
 		return dao.commentlikeinspect(dto)>0?true:false;
 	}
+	
+	public int commentCount(int feedSeq) {
+		return dao.commentCount(feedSeq);
+	}
 }

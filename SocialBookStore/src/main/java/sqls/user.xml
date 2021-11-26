@@ -30,5 +30,11 @@
 		from sbs_user
 		where id=#{id}
 	</select>
+	
+	<select id="getUserlist" parameterType="java.lang.String" resultType="mul.com.a.dto.UserDto">
+		select seq, id, email, nickname, birth, name, address, reg_date, auth, introduce, filename
+		from sbs_user
+		where nickname=#{nickname}
+	</select>
 
 </mapper>
