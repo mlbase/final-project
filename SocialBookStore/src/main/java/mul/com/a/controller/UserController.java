@@ -1,6 +1,8 @@
 package mul.com.a.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,7 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder encoder;
 	
-	@GetMapping(value="/login")
+	@PostMapping(value="/login")
 	public UserDto login(String id, String pwd){
 		
 		String encodedpwd = service.getpw(id);
@@ -93,5 +95,13 @@ public class UserController {
 		return msg; 
 	}
 	
+	@GetMapping(value="/userlist")
+	public List<UserDto> getUserlist(String nickname){
+		List<UserDto> list = null;
+		
+		list = service.getUserlist(nickname);
+		
+		return list;
+	}
 	
 }

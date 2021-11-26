@@ -46,7 +46,7 @@
 				GENRE,
 				AMOUNT,
 				CONTENT
-				FROM SBS_BOOK) AS TB
+				FROM SBS_BOOK
 				<if test="choice=='title'">
 				WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
 				</if>
@@ -55,9 +55,10 @@
 				</if>
 				<if test="choice=='content'">
 				WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
-				</if>	
+				</if>
+				) AS TB	
 		 		<![CDATA[
-		 		AND RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1  
+		 		WHERE RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1  
 		  		AND RNUM <= #{currentpage}*#{rowsperpage}
 		  		]]>
 	</select>
@@ -78,7 +79,7 @@
 				CONTENT,
 				SORT,
 				AMOUNT
-				FROM SBS_BOOK) AS TB
+				FROM SBS_BOOK
 				<if test="choice=='title'">
 				WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
 				</if>
@@ -88,8 +89,9 @@
 				<if test="choice=='content'">
 				WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
 				</if>
+				) AS TB
 		 		<![CDATA[
-		 		AND RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1  
+		 		WHERE RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1  
 		  		AND RNUM <= #{currentpage}*#{rowsperpage}
 		  		]]>
 		 

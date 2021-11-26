@@ -1,5 +1,7 @@
 package mul.com.a.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,5 +43,9 @@ public class UserService {
 	public boolean idcheck(String id) {
 
 		return dao.idcheck(id)>0?true:false;
+	}
+	
+	public List<UserDto> getUserlist(String nickname) {
+		return dao.getUserlist(nickname);
 	}
 }
