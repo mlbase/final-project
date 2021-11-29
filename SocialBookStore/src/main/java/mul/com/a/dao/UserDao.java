@@ -22,4 +22,8 @@ public interface UserDao {
 	int idcheck(String id);
 	
 	List<UserDto> getUserlist(String nickname);
+	
+	int updateIntro(String nickname, String introduce);
+	
+	int updatefilename(String nickname, String filename);
 }
