@@ -48,4 +48,15 @@ public class UserService {
 	public List<UserDto> getUserlist(String nickname) {
 		return dao.getUserlist(nickname);
 	}
+	
+	public boolean updateIntro(String nickname,String introduce) { 
+		
+		int n = dao.updateIntro(nickname, introduce); 
+		return n>0?true:false;
+	}
+	
+	public boolean updatefilename(String nickname, String filename) {
+	
+		return dao.updatefilename(nickname, filename)>0?true:false;
+	}
 }

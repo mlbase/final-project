@@ -36,5 +36,17 @@
 		from sbs_user
 		where nickname=#{nickname}
 	</select>
+	
+	<update id="updateIntro" parameterType="java.lang.String">
+		update sbs_user
+		set introduce=#{introduce}
+		where nickname=#{nickname}
+	</update>
+	
+	<update id="updatefilename" parameterType="java.lang.String">
+		update sbs_user
+		set filename=#{filename}
+		where nickname=#{nickname}
+	</update>
 
 </mapper>
