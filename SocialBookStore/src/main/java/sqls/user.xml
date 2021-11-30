@@ -30,10 +30,23 @@
 		from sbs_user
 		where id=#{id}
 	</select>
-
-<!-- 	<select id="updateIntro" parameterType="java.lang.String">
+	
+	<select id="getUserlist" parameterType="java.lang.String" resultType="mul.com.a.dto.UserDto">
+		select seq, id, email, nickname, birth, name, address, reg_date, auth, introduce, filename
+		from sbs_user
+		where nickname=#{nickname}
+	</select>
+	
+	<update id="updateIntro" parameterType="java.lang.String">
 		update sbs_user
-		set introduce="#{intro}"
-		where id=#{id}
-		</select> -->
+		set introduce=#{introduce}
+		where nickname=#{nickname}
+	</update>
+	
+	<update id="updatefilename" parameterType="java.lang.String">
+		update sbs_user
+		set filename=#{filename}
+		where nickname=#{nickname}
+	</update>
+
 </mapper>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="test">hello world</div>
+<div id=imageT>
+<img id="photo" src="http://localhost:3000/upload/1637907070528.jpg">
+</div>
+<script type="text/javascript">
+$.ajax({
+	url:"http://localhost:3000/upload/1637907070528.jpg",
+	type:'get',
+	data:'text',
+	success:function(file){
+		alert(success);
+		$('#photo').attr("src","http://localhost:3000/upload/1637907070528.jpg");
+	},
+	
+})
+var a = $("#test").text();
+alert(a);
+</script>
+</body>
+</html>

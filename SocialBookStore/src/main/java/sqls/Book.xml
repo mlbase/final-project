@@ -26,8 +26,75 @@
 		DATE_FORMAT(publish_date, '%Y%m%d'), sort
 		from sbs_book
 		 -->
-		select 	title, filename, writer, genre, isbn,  reg_date, publish_date, sort
+		select *
 		from sbs_book
+	</select>
+	<select id="booklistgenre" resultType="mul.com.a.dto.BookDto">
+		select TB.*
+		from ( select rank() over(partition by genre order by reg_date desc)  as RNUM,
+				COUNT(*) OVER() AS TOTCNT,
+				SEQ,
+				TITLE,
+				FILENAME,
+				WRITER,
+				PUBLISHER,
+				PRICE,
+				ISBN,
+				REG_DATE,
+				PUBLISH_DATE,
+				DELIVERY_FEE,
+				GENRE,
+				AMOUNT,
+				CONTENT
+				FROM SBS_BOOK
+				<if test="choice=='title'">
+				WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+				</if>
+				<if test="choice=='writer'">
+				WHERE WRITER LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+				</if>
+				<if test="choice=='content'">
+				WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+				</if>
+				) AS TB	
+		 		<![CDATA[
+		 		WHERE RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1  
+		  		AND RNUM <= #{currentpage}*#{rowsperpage}
+		  		]]>
+	</select>
+	<select id="booklistsort" resultType="mul.com.a.dto.BookDto">
+		select TB.*
+		from ( select rank() over(partition by sort order by reg_date desc)  as RNUM,
+				COUNT(*) OVER() AS TOTCNT,
+				SEQ,
+				TITLE,
+				FILENAME,
+				WRITER,
+				PUBLISHER,
+				PRICE,
+				ISBN,
+				REG_DATE,
+				PUBLISH_DATE,
+				DELIVERY_FEE,
+				CONTENT,
+				SORT,
+				AMOUNT
+				FROM SBS_BOOK
+				<if test="choice=='title'">
+				WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+				</if>
+				<if test="choice=='writer'">
+				WHERE WRITER LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+				</if>
+				<if test="choice=='content'">
+				WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+				</if>
+				) AS TB
+		 		<![CDATA[
+		 		WHERE RNUM >= (#{currentpage}*#{rowsperpage})-#{rowsperpage}+1  
+		  		AND RNUM <= #{currentpage}*#{rowsperpage}
+		  		]]>
+		 
 	</select>
 	
 	<select id="orderlist" resultType="mul.com.a.dto.OrderDto">
@@ -35,10 +102,10 @@
 		from sbs_order
 	</select>
 	
-	<select id="wishlist" resultType="mul.com.a.dto.WishDto">
-		select id, book_seq, delivery_fee, book_count, price
-		from sbs_wishlist
-		where id=#{id}
+	<select id="wishlist" parameterType="java.lang.String" resultType="mul.com.a.dto.WishDto">
+		select a.id, a.book_seq, a.delivery_fee, a.book_count, a.price, b.title, b.writer, b.filename
+		from sbs_wishlist as a, sbs_book as b 
+		where id=#{id} and a.book_seq = b.seq;
 	</select>
 	
 	<select id="bookcheck" parameterType="java.lang.String" resultType="java.lang.Integer">
@@ -48,10 +115,36 @@
 	</select>
 	
 	<select id="getbook" parameterType="java.lang.String" resultType="mul.com.a.dto.BookDto">
-		select seq, title, filename, writer, publisher, price, isbn, sort, genre, delivery_fee, 
-		amount, publish_date
+		select *
 		from sbs_book
-		where title=#{title}
+		where seq=${seq}
+	</select>
+
+	<select id="bookcountsort" resultType="java.lang.Integer">
+		select count(*)
+		from sbs_book
+		<if test="choice=='title'">
+			WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+		</if>
+		<if test="choice=='writer'">
+			WHERE WRITER LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+		</if>
+		<if test="choice=='content'">
+			WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
+		</if>
+	</select>
+	<select id="bookcountgenre" resultType="java.lang.Integer">
+		select count(*)
+		from sbs_book
+		<if test="choice=='title'">
+			WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+		</if>
+		<if test="choice=='writer'">
+			WHERE WRITER LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+		</if>
+		<if test="choice=='content'">
+			WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
+		</if>
 	</select>
 
 </mapper>

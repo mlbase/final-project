@@ -1,5 +1,7 @@
 package mul.com.a.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,8 +45,19 @@ public class UserService {
 		return dao.idcheck(id)>0?true:false;
 	}
 	
-	/*
-	 * public boolean updateIntro(String id, String new_intro) { return
-	 * dao.updateIntro(id, new_intro)>0?true:false; }
-	 */
+	public List<UserDto> getUserlist(String nickname) {
+		return dao.getUserlist(nickname);
+	}
+	
+	public boolean updateIntro(String nickname,String introduce) { 
+		
+		int n = dao.updateIntro(nickname, introduce); 
+		return n>0?true:false;
+	}
+	
+	public boolean updatefilename(String nickname, String filename) {
+		
+		
+		return dao.updatefilename(nickname, filename)>0?true:false;
+	}
 }

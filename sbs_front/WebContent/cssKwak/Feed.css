@@ -1,7 +1,6 @@
 @charset "UTF-8";
 .container1{
 	display: grid;
-	grid-gap: 10px;
 	grid-template-columns: 20vw 60vw 20vw;
 	height: 100vh;
 	grid-template-areas:'left content right';
@@ -12,6 +11,7 @@
 	background-color: white;
 	padding:0px;
 	border: none;
+	/* border: solid 1px black; */
 }
 .infinite-list div {
 	margin-left:45px;
@@ -86,6 +86,10 @@ a:visited{
 	margin-top:20px;
 }
 #likecount1{
+	font-size:20px;
+	font-weight:bold;
+}
+#cntComment{
 	font-size:20px;
 	font-weight:bold;
 }

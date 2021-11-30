@@ -18,7 +18,7 @@
 	<input type="hidden" id="nickname" name="nickname">
 	<div id="content-frame">
 	<textarea name="content"></textarea>
-	<button type="button" id="postcomment">작성</button>	
+	<button type="button" id="postcomment" onclick="refreshPage()">작성</button>	
 	</div>
 	<input type=hidden id=feedSeq name=feedSeq>
 	
@@ -26,13 +26,17 @@
 	</div>
 <!--보내야할 정보 1.nickname, content, feed_seq, reg_date  -->	
 </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 let ses = JSON.parse(sessionStorage.getItem("login"));
 //alert(JSON.stringify(ses));
 
 let parsing = location.href.split("?");
 //alert(parsing[1]);
 $("#feedSeq").val(parsing[1]);
+
+function refreshPage(){
+	window.location.reload();
+}
 
 function getLike(seq){
 	let result = 0;
@@ -118,7 +122,7 @@ function likebtn(nickname, commentSeq) {
 		type:"post",
 		data : {"nickname":nickname, "commentSeq":commentSeq, "isLike": 1},
 		success: function(resp){
-			alert(resp);
+			//alert(resp);
 			if(resp == 'OK'){
 				var cnt = Number(obj.text())+1;
 				jQuery(obj).text(cnt);
@@ -137,6 +141,7 @@ function likebtn(nickname, commentSeq) {
 };
 	
 
-</script>
+</script> -->
+<script type="text/javascript" src="javascript/comment.js"></script>
 </body>
 </html>

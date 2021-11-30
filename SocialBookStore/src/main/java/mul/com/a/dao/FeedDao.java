@@ -21,11 +21,11 @@ public interface FeedDao {
 	
 	List<FeedDto> myfeed2(Map<String, Object> map);
 	
+	List<FeedDto> newsfeed(Map<String, Object> map);
+	
+	List<FeedDto> bestfeed(Map<String, Object> map);
+	
 	int postcomment(CommentDto dto);
 	
 	List<CommentDto> commentlist(int feedSeq);
-	
-	List<FeedDto> newsfeed(Map<String, Object> map);
-
-	List<FeedDto> bestfeed(Map<String, Object> map);
 }

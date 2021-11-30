@@ -28,14 +28,14 @@
 				<td><textarea id="tag" name="tag"></textarea></td>
 			</tr>
 			<tr id="tr6">
-				<td id="td6"><button type="button" id="postFeed">작성</button></td>
+				<td id="td6"><button type="button" id="postFeed" onclick='window.close()'>작성</button></td>
 			</tr>			
 		</table>
 		<input type="hidden" id="filename" name="filename" value="">
 	</form>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 let ses = JSON.parse(sessionStorage.getItem("login"));
 $("#td1").html(ses.nickname);
 $("#nickname").val(ses.nickname);
@@ -85,6 +85,7 @@ $(document).ready(function(){
 	});
 	
 });
-</script>
+</script> -->
+<script type="text/javascript" src="../javascript/feedWrite.js"></script>
 </body>
 </html>

@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mul.com.a.dao.SocialDao">
+	<select id="commentCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) 
+		from sbs_comment
+		where feed_seq=#{feedSeq}
+	</select>
+	
 	<select id="feedlikecount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 		select count(*)
 		from sbs_like

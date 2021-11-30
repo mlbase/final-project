@@ -1,5 +1,7 @@
 package mul.com.a.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +21,9 @@ public interface UserDao {
 	
 	int idcheck(String id);
 	
-	/* int updateIntro(String id, String intro); */
+	List<UserDto> getUserlist(String nickname);
+	
+	int updateIntro(String nickname, String introduce);
+	
+	int updatefilename(String nickname, String filename);
 }

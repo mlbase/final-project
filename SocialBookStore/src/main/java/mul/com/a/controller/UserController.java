@@ -1,12 +1,23 @@
 package mul.com.a.controller;
 
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import mul.com.a.dto.UserDto;
 import mul.com.a.service.UserService;
@@ -93,16 +104,73 @@ public class UserController {
 		return msg; 
 	}
 	
-	/*
-	 * @GetMapping("/updateIntro") public String updateIntro(String id, String
-	 * introduce, String new_intro) { String msg = "NO";
-	 * 
-	 * boolean b = false;
-	 * 
-	 * b = service.updateIntro(id, new_intro);
-	 * 
-	 * if(b) { msg = "YES"; } return msg; }
-	 */
+	@GetMapping(value="/userlist")
+	public List<UserDto> getUserlist(String nickname){
+		List<UserDto> list = null;
+		
+		list = service.getUserlist(nickname);
+		
+		return list;
+	}
 	
+	 @GetMapping(value="/updateIntro") 
+	 public String updateIntro(String nickname, String introduce) { 
+		System.out.println("UserController updateIntro()");
+		System.out.println(nickname+introduce);
+	 	boolean b = service.updateIntro(nickname,introduce);
+	  
+	 	if(!b) { 
+	 		return "NG";
+	 	} 
+	 	
+	 	return "OK";
+	 }
 	
+	 @RequestMapping(value = "/profileload", method = RequestMethod.POST)
+		public String profileupload(@RequestParam("uploadFile")
+								MultipartFile uploadFile, HttpServletRequest req,
+								String nickname) {
+			System.out.println("UserController profileupload");
+			
+			System.out.println("nickname: " + nickname);
+		
+			// 경로
+			//server: 3000
+			String uploadPath = req.getServletContext().getRealPath("/profile");
+			//폴더
+			//String uploadPath = "d://temp";
+			String expansion[] = uploadFile.getOriginalFilename().split("\\.");
+			
+			
+			String filename = Long.toString(new Date().getTime())+"."+expansion[1];
+			 
+			String filepath = uploadPath + File.separator + filename;
+											// '/'
+			System.out.println(filepath);
+			
+			String msg = "file upload fail";
+			
+			try {
+				BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+				os.write(uploadFile.getBytes());
+				os.close();
+				
+				// db input
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				return msg;
+			}
+			boolean b = false;
+			
+			b = service.updatefilename(nickname, filename);
+			
+			if(b) {
+				msg = "file upload success";
+			}
+			
+			return msg;
+		}
+	 
 }

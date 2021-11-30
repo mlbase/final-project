@@ -26,4 +26,6 @@ public interface SocialDao {
 	int feedlikeinspect(LikeDto dto);
 	
 	int commentlikeinspect(LikeDto dto);
+	
+	int commentCount(int feedSeq);
 }

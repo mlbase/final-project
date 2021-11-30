@@ -40,13 +40,14 @@
 		             , TAG
 		             , REG_DATE
 		      FROM SBS_FEED FD
-		     WHERE FD.NICKNAME = #{nickname}
+		     WHERE FD.NICKNAME = (#{nickname})
 		)TA
 		WHERE RNUM >= (#{currentPage}*#{rowsperPage})-#{rowsperPage}+1
 		 <![CDATA[  
 		  AND RNUM <= #{currentPage}*#{rowsperPage}
 		  ]]>
 	</select>
+	
 	<select id="newsfeed" parameterType="hashMap" resultType="mul.com.a.dto.FeedDto">
 		SELECT TA.*
 		  FROM (SELECT RANK() OVER(ORDER BY FD.REG_DATE DESC) AS RNUM
