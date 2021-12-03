@@ -29,7 +29,7 @@
 		select *
 		from sbs_book
 	</select>
-	<select id="booklistgenre" resultType="mul.com.a.dto.BookDto">
+	<select id="booklistgenre" parameterType="mul.com.a.dto.Bookparam" resultType="mul.com.a.dto.BookDto">
 		select TB.*
 		from ( select rank() over(partition by genre order by reg_date desc)  as RNUM,
 				COUNT(*) OVER() AS TOTCNT,
@@ -46,7 +46,7 @@
 				GENRE,
 				AMOUNT,
 				CONTENT
-				FROM SBS_BOOK
+				FROM sbs_book
 				<if test="choice=='title'">
 				WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
 				</if>
@@ -62,7 +62,7 @@
 		  		AND RNUM <= #{currentpage}*#{rowsperpage}
 		  		]]>
 	</select>
-	<select id="booklistsort" resultType="mul.com.a.dto.BookDto">
+	<select id="booklistsort" parameterType="mul.com.a.dto.Bookparam" resultType="mul.com.a.dto.BookDto">
 		select TB.*
 		from ( select rank() over(partition by sort order by reg_date desc)  as RNUM,
 				COUNT(*) OVER() AS TOTCNT,
@@ -79,7 +79,7 @@
 				CONTENT,
 				SORT,
 				AMOUNT
-				FROM SBS_BOOK
+				FROM sbs_book
 				<if test="choice=='title'">
 				WHERE TITLE LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
 				</if>
@@ -97,13 +97,14 @@
 		 
 	</select>
 	
-	<select id="orderlist" resultType="mul.com.a.dto.OrderDto">
-		select id, book_seq, order_date, address, delivery_fee, book_count, price
-		from sbs_order
+	<select id="orderlist" parameterType="java.lang.String" resultType="mul.com.a.dto.OrderDto">
+		select a.id, a.book_seq, a.order_date, a.address, a.delivery_fee, a.book_count, a.price, b.filename, b.title
+		from sbs_order as a, sbs_book as b
+		where id=#{id} and a.book_seq = b.seq
 	</select>
 	
 	<select id="wishlist" parameterType="java.lang.String" resultType="mul.com.a.dto.WishDto">
-		select a.id, a.book_seq, a.delivery_fee, a.book_count, a.price, b.title, b.writer, b.filename
+		select a.seq, a.id, a.book_seq, a.delivery_fee, a.book_count, a.price, b.title, b.writer, b.filename
 		from sbs_wishlist as a, sbs_book as b 
 		where id=#{id} and a.book_seq = b.seq;
 	</select>
@@ -120,7 +121,7 @@
 		where seq=${seq}
 	</select>
 
-	<select id="bookcountsort" resultType="java.lang.Integer">
+	<select id="bookcountsort" parameterType="mul.com.a.dto.Bookparam" resultType="java.lang.Integer">
 		select count(*)
 		from sbs_book
 		<if test="choice=='title'">
@@ -133,7 +134,7 @@
 			WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND SORT=#{sort}
 		</if>
 	</select>
-	<select id="bookcountgenre" resultType="java.lang.Integer">
+	<select id="bookcountgenre" parameterType="mul.com.a.dto.Bookparam" resultType="java.lang.Integer">
 		select count(*)
 		from sbs_book
 		<if test="choice=='title'">
@@ -146,5 +147,14 @@
 			WHERE CONTENT LIKE CONCAT('%', #{search}, '%') AND GENRE=#{genre}
 		</if>
 	</select>
-
+	
+	<delete id="deletewish" parameterType="java.lang.Integer">
+      delete from sbs_wishlist 
+      where seq=${seq}
+   </delete>
+   
+   <delete id="resetwish" parameterType="java.lang.String">
+      delete from sbs_wishlist
+      where id=#{id}
+   </delete>   
 </mapper>

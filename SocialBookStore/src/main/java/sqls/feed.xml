@@ -17,7 +17,7 @@
 		from sbs_feed
 	</select>
 	
-	<select id="commentlist" resultType="mul.com.a.dto.CommentDto">
+	<select id="commentlist" parameterType="java.lang.Integer" resultType="mul.com.a.dto.CommentDto">
 		select seq, nickname, content, feed_seq, reg_date
 		from sbs_comment
 		where feed_seq=#{feedSeq}
@@ -25,7 +25,7 @@
 	
 	<select id="myfeed" parameterType="java.lang.String" resultType="mul.com.a.dto.FeedDto">
 		SELECT SEQ, NICKNAME, CONTENT, FILENAME, TAG, REG_DATE
-		  FROM SBS_FEED
+		  FROM sbs_feed
 		 WHERE NICKNAME = (SELECT NICKNAME FROM SBS_USER WHERE ID=#{ID})
 	</select>
 	
@@ -39,7 +39,7 @@
 		             , FILENAME
 		             , TAG
 		             , REG_DATE
-		      FROM SBS_FEED FD
+		      FROM sbs_feed FD
 		     WHERE FD.NICKNAME = (#{nickname})
 		)TA
 		WHERE RNUM >= (#{currentPage}*#{rowsperPage})-#{rowsperPage}+1
@@ -58,7 +58,7 @@
 		             , FILENAME
 		             , TAG
 		             , REG_DATE
-		      FROM SBS_FEED FD
+		      FROM sbs_feed FD
 		)TA
 		WHERE RNUM >= (#{currentPage}*#{rowsperPage})-#{rowsperPage}+1
 		 <![CDATA[  

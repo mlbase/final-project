@@ -3,7 +3,7 @@ package mul.com.a.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import mul.com.a.dto.LikeDto;
@@ -19,7 +19,7 @@ public interface SocialDao {
 	
 	int postmessage(MessageDto dto);
 	
-	List<MessageDto> messagelist(String id);
+	List<MessageDto> messagelist(@Param("id") String id,@Param("myid") String myid);
 	
 	int postlike(LikeDto dto);
 	
@@ -28,4 +28,8 @@ public interface SocialDao {
 	int commentlikeinspect(LikeDto dto);
 	
 	int commentCount(int feedSeq);
+	
+	List<MessageDto> messageIsent(@Param("id")String id,@Param("opponentid") String opponentid);
+	
+	List<MessageDto> whoSentlist(String id);
 }

@@ -49,4 +49,15 @@
 		where nickname=#{nickname}
 	</update>
 
+	<update id="updateEmail" parameterType="java.lang.String">
+      update sbs_user
+      set email=#{email}
+      where id=#{id}
+    </update>
+    
+    <update id="updateAddress" parameterType="java.lang.String">
+       update sbs_user
+       set address=#{address}
+       where id=#{id}
+    </update>
 </mapper>

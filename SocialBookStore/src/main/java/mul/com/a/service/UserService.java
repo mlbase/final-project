@@ -59,4 +59,18 @@ public class UserService {
 	
 		return dao.updatefilename(nickname, filename)>0?true:false;
 	}
+	
+	public boolean updateEmail(String id, String email) { 
+		
+		int n = dao.updateEmail(id, email); 
+		return n>0?true:false;
+	}
+    
+    public boolean updateAddress(String id, String address) { 
+		
+		int n = dao.updateAddress(id, address); 
+		return n>0?true:false;
+	}
+	
+	
 }

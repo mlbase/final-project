@@ -4,20 +4,24 @@ public class MessageDto {
 
 	private int seq;
 	private String sendId;
-	private String reciveId;
+	private String receiveId;
 	private String content;
 	private String regDate;
 	
 	public MessageDto(){}
 
-	public MessageDto(int seq, String sendId, String reciveId, String content, String regDate) {
+	
+	
+	public MessageDto(int seq, String sendId, String receiveId, String content, String regDate) {
 		super();
 		this.seq = seq;
 		this.sendId = sendId;
-		this.reciveId = reciveId;
+		this.receiveId = receiveId;
 		this.content = content;
 		this.regDate = regDate;
 	}
+
+
 
 	public int getSeq() {
 		return seq;
@@ -35,13 +39,19 @@ public class MessageDto {
 		this.sendId = sendId;
 	}
 
-	public String getReciveId() {
-		return reciveId;
+	
+
+	public String getReceiveId() {
+		return receiveId;
 	}
 
-	public void setReciveId(String reciveId) {
-		this.reciveId = reciveId;
+
+
+	public void setReceiveId(String receiveId) {
+		this.receiveId = receiveId;
 	}
+
+
 
 	public String getContent() {
 		return content;
@@ -59,11 +69,15 @@ public class MessageDto {
 		this.regDate = regDate;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "MessageDto [seq=" + seq + ", sendId=" + sendId + ", reciveId=" + reciveId + ", content=" + content
+		return "MessageDto [seq=" + seq + ", sendId=" + sendId + ", receiveId=" + receiveId + ", content=" + content
 				+ ", regDate=" + regDate + "]";
 	}
+
+	
 	
 	
 }

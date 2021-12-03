@@ -29,8 +29,8 @@ public class SocialService {
 		return dao.postmessage(dto)>0?true:false;
 	}
 	
-	public List<MessageDto> messagelist(String id) {
-		return dao.messagelist(id);
+	public List<MessageDto> messagelist(String id, String myid) {
+		return dao.messagelist(id, myid);
 	}
 	
 	public boolean postlike(LikeDto dto) {
@@ -47,5 +47,15 @@ public class SocialService {
 	
 	public int commentCount(int feedSeq) {
 		return dao.commentCount(feedSeq);
+	}
+	
+	
+	
+	public List<MessageDto> messageIsent(String id, String opponentid) {
+		return dao.messageIsent(id, opponentid);
+	}
+	
+	public List<MessageDto> whoSentlist(String id) {
+		return dao.whoSentlist(id);
 	}
 }

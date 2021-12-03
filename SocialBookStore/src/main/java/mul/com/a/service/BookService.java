@@ -39,8 +39,8 @@ public class BookService {
 		return dao.booklist();
 	}
 	
-	public List<OrderDto> orderlist(){
-		return dao.orderlist();
+	public List<OrderDto> orderlist(String id){
+		return dao.orderlist(id);
 	}
 	
 	public boolean titlecheck(String title) {
@@ -75,5 +75,13 @@ public class BookService {
 	public int bookgenrecount(Bookparam param) {
 		
 		return dao.bookcountgenre(param);
+	}
+	
+	public boolean wishdelete(int seq) {
+		return dao.deletewish(seq)>0?true:false;
+	}
+	
+	public boolean wishreset(String id) {
+		return dao.resetwish(id)>0?true:false;
 	}
 }
