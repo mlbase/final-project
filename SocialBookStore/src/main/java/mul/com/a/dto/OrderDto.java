@@ -1,6 +1,8 @@
 package mul.com.a.dto;
 
-public class OrderDto {
+import java.io.Serializable;
+
+public class OrderDto implements Serializable{
 
 	private int seq;
 	private String id;
@@ -11,11 +13,15 @@ public class OrderDto {
 	private int bookCount;
 	private int price;
 	private String cardNum;
+	private String title;
+	private String filename;
 	
 	public OrderDto() {}
 
+	
+
 	public OrderDto(int seq, String id, int bookSeq, String orderDate, String address, int deliveryFee, int bookCount,
-			int price, String cardNum) {
+			int price, String cardNum, String title, String filename) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -26,7 +32,11 @@ public class OrderDto {
 		this.bookCount = bookCount;
 		this.price = price;
 		this.cardNum = cardNum;
+		this.title = title;
+		this.filename = filename;
 	}
+
+
 
 	public int getSeq() {
 		return seq;
@@ -100,12 +110,40 @@ public class OrderDto {
 		this.cardNum = cardNum;
 	}
 
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+
+	public String getFilename() {
+		return filename;
+	}
+
+
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "OrderDto [seq=" + seq + ", id=" + id + ", bookSeq=" + bookSeq + ", orderDate=" + orderDate
 				+ ", address=" + address + ", deliveryFee=" + deliveryFee + ", bookCount=" + bookCount + ", price="
-				+ price + ", cardNum=" + cardNum + "]";
+				+ price + ", cardNum=" + cardNum + ", title=" + title + ", filename=" + filename + "]";
 	}
+
+	
 	
 	
 	

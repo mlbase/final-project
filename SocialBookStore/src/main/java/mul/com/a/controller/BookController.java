@@ -1,11 +1,17 @@
 package mul.com.a.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mul.com.a.dto.BookDto;
 import mul.com.a.dto.Bookparam;
@@ -61,17 +67,29 @@ public class BookController {
 	}
 	
 	@PostMapping(value="/order")
-	public String createorder(OrderDto dto) {
-		//System.out.println(dto.toString());
+	public String createorder(@RequestParam Map<String, Object> map)throws Exception {
+	
+		System.out.println("createorder()");
 		String msg = "";
 		
+		String json = map.get("list").toString();
+//		System.out.println(json);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		List<OrderDto> list = mapper.readValue(json, new TypeReference<ArrayList<OrderDto>>(){});
+		//for (OrderDto dto : list) { System.out.println(dto.toString()); }
+		
+		
+		
 		boolean b = false;
-		
-		b = service.postorder(dto);
-		
-		if(b) {
-			msg = "OK";
+		for (OrderDto dto : list) {
+			b = service.postorder(dto);
+			
+			if(b) {
+				msg = "OK";
+			}
 		}
+		
 	
 		return msg;
 	}
@@ -120,7 +138,7 @@ public class BookController {
 	
 	@GetMapping(value="/orderlist")
 	public List<OrderDto> orderlist(String id) {
-		List<OrderDto> list = service.orderlist();
+		List<OrderDto> list = service.orderlist(id);
 		
 		return list;
 	}
@@ -130,6 +148,34 @@ public class BookController {
 		List<WishDto> list = service.wishlist(id);
 		
 		return list;
+	}
+	
+	@GetMapping(value="/wishdelete")
+	public String deletewish(int seq) {
+		String msg = "NO";
+		
+		boolean b = service.wishdelete(seq);
+		
+		if(b) {
+			msg = "YES";
+		}
+		
+		return msg;
+	}
+	
+	@GetMapping(value="/resetwish")
+	public String deletewish(String id) {
+		System.out.println("bookcontroller() resetwish");
+		
+		String msg = "NO";
+		
+		boolean b = service.wishreset(id);
+		
+		if(b) {
+			msg= "YES";
+		}
+		
+		return msg;
 	}
 	
 	@GetMapping(value="/genrecount")

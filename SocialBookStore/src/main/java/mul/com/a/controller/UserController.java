@@ -70,19 +70,25 @@ public class UserController {
 		return msg;
 	}
 	
-	@GetMapping("/change")
+	@PostMapping("/change")
 	public String passwordchange(String id, String pwd, String new_pwd){
 		String msg = "비밀번호변경에 실패했습니다";
-		
+		//System.out.println(pwd);
+		//System.out.println(new_pwd);
 		boolean b = false;
-		b = encoder.matches(pwd, service.getpw(id));
-		//System.out.println(b);
+		String encodedpwd = service.getpw(id);
+		
+		//System.out.println(encodedpwd);
+		b = encoder.matches(pwd, encodedpwd);
+		System.out.println(b);
 		if(b) {
 			b = service.pwdchange(id, new_pwd);
 		}
-				
+		System.out.println(b);
+		String sucmsg = "OK";
 		if(b) {
-			msg = "비밀번호변경에 성공했습니다";
+			
+			return sucmsg;
 		}
 		
 		return msg;
@@ -172,5 +178,29 @@ public class UserController {
 			
 			return msg;
 		}
+	 
+	 @GetMapping(value="/updateEmail") public String updateEmail(String id, String
+			  email) {
+			  System.out.println(id + "&" + email);
+				  
+			  boolean b = service.updateEmail(id, email);
+			  
+			  if(!b) { return "NG"; }
+			  
+			  return "OK"; 
+			  
+			  }
+		     
+		      @GetMapping(value="/updateAddress") public String updateAddress(String id, String
+		      address) {
+		      System.out.println(id + "&" + address);
+			  
+		      boolean b = service.updateAddress(id, address);
+
+		      if(!b) { return "NG"; }
+
+		      return "OK"; 
+		      
+		      }
 	 
 }

@@ -20,7 +20,7 @@ public interface BookDao {
 	
 	List<BookDto> booklist();
 	
-	List<OrderDto> orderlist();
+	List<OrderDto> orderlist(String id);
 	
 	int bookcheck(String title);
 	
@@ -37,4 +37,8 @@ public interface BookDao {
 	int bookcountgenre(Bookparam param);
 	
 	List<BookDto> booklistgenre(Bookparam param);
+	
+	int deletewish(int seq);
+	
+	int resetwish(String id);
 }

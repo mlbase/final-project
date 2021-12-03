@@ -32,20 +32,38 @@
 		where nickname=#{nickname} and comment_seq=${commentSeq} and comment_seq>0
 	</select>
 	
-	<select id="messagelist" parameterType="java.lang.String" resultType="mul.com.a.dto.MessageDto">
-		select seq, send_id, receive_id, content, reg_date
-		from sbs_message
-		where send_id = #{id} or receive_id = #{id}
-	</select>
+	<select id="messagelist" parameterType="hasmap" resultType="mul.com.a.dto.MessageDto">
+      select seq, send_id, receive_id, content, reg_date
+      from sbs_message
+      where send_id = #{id} and receive_id = #{myid}
+      order by reg_date desc
+   </select>
 	
 	<insert id="postmessage" parameterType="mul.com.a.dto.MessageDto">
-		insert into sbs_message(send_id, recieve_id, content, reg_date)
-		values(#{sendId}, #{recieveId}, #{content}, now())
+		insert into sbs_message(send_id, receive_id, content, reg_date)
+		values(#{sendId}, #{receiveId}, #{content}, now())
 	</insert>
 	
 	<insert id="postlike" parameterType="mul.com.a.dto.LikeDto">
 		insert into sbs_like(nickname, is_like, comment_seq, feed_seq)
 		values(#{nickname}, ${isLike}, ${commentSeq}, ${feedSeq})
 	</insert>
-
+   
+   <select id="messageIsent" parameterType="hasmap" resultType="mul.com.a.dto.MessageDto">
+      select seq, send_id, receive_id, content, reg_date
+      from sbs_message
+      where send_id = #{id} and receive_id = #{opponentid}
+      order by reg_date desc
+   </select>
+   
+   <select id="whoSentlist" parameterType="java.lang.String" resultType="mul.com.a.dto.MessageDto">
+       select send_id 
+       from sbs_message
+        where (send_id, reg_date) in 
+           (select send_id, max(reg_date) as reg_date
+            from sbs_message 
+            WHERE receive_id=#{id} 
+            group by send_id)
+        order by reg_date desc
+   </select>
 </mapper>

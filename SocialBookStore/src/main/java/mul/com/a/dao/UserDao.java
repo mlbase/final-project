@@ -26,4 +26,10 @@ public interface UserDao {
 	int updateIntro(String nickname, String introduce);
 	
 	int updatefilename(String nickname, String filename);
+	
+	int updateEmail(String id, String email); 
+	
+	int updateAddress(String id, String address); 
+	
+	
 }

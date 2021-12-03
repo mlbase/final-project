@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mul.com.a.dao.MainDao">
+	<select id="bestsellerimage" resultType="mul.com.a.dto.BookDto">
+		select TB.*
+		from ( select rank() over(partition by sort order by
+		reg_date desc) as RNUM,
+		COUNT(*) OVER() AS TOTCNT,
+		SEQ,
+		TITLE,
+		FILENAME,
+		WRITER,
+		PUBLISHER,
+		PRICE,
+		ISBN,
+		REG_DATE
+		FROM sbs_book
+		WHERE SORT='베스트셀러'
+		) AS TB
+		 		<![CDATA[
+		 		WHERE RNUM >= 1  
+		  		AND RNUM <= 6
+		  		
+		  		]]>
+
+	</select>
+</mapper>
